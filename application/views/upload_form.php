@@ -6,7 +6,7 @@
 
 
 
-<?php echo form_open_multipart('http://www.localhost/ci/index.php/Controller_EC/do_upload');?>
+<?php echo form_open_multipart('http://192.168.128.163/ci/index.php/Controller_EC/do_upload');?>
 
 <input type="file" name="userfile" size="20" />
 
