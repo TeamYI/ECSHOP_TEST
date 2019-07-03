@@ -74,6 +74,11 @@
           </form>
         </div>
         <div class="col-md-5">
+					<?php 
+            if($this->session->userdata['ss_user_id']== "master"){
+            ?>
+           <a href="/ci/index.php/Controller_EC/product_upload_page"><img src="/ci/img/pd_insert.png" width="180px"></a>
+         <?php } ?> 
         </div>      
       </div>
     </div>
