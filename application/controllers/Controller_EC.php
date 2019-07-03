@@ -59,7 +59,7 @@ class Controller_EC extends CI_Controller {
     // 商品画像の登録
     public function do_upload()
     {
-        $config['upload_path'] = './ci/img';
+        $config['upload_path'] = './img';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '100';
         $config['max_width']  = '1024';
@@ -71,7 +71,7 @@ class Controller_EC extends CI_Controller {
         $this->load->model('Model_EC');
         $data_list['category'] = $this->Model_EC->get_category();
         $data_list['img'] = array(    
-                    'img_path'        => '/ci/img/'.$this->upload->data()['file_name']
+                    'img_path'        => '/img/'.$this->upload->data()['file_name']
                 );
 
         $this->load->view('product_upload_page', $data_list);
