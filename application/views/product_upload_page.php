@@ -157,7 +157,7 @@
           <!-- 로그인폼 --><!-- 로그인폼 -->
 
             <!-- 상품등록 - 사진등록 -->
-            <?php echo form_open_multipart('http://www.localhost/ci/index.php/Controller_EC/do_upload');?>
+            <?php echo form_open_multipart('http://192.168.128.163/ci/index.php/Controller_EC/do_upload');?>
               <div class="input-group double-input">
                 <span class="input-group-btn">
                 <input class="btn btn-default" type="file" name="userfile" /></span>
