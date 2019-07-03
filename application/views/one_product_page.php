@@ -275,6 +275,9 @@
                 <tr class="success">
                   <td width="200px">
                     <?php if ($this->session->userdata['ss_user_id'] == "master") { ?>
+                      
+                      <input type="hidden"  id="test2" value="<?=$ls->inq_no?>" name="">
+
                       <a data-toggle="modal" data-target="#myModal" data-title="Test Title" id="modal" value="123"><?=$ls->inq_title?></a> 
                   <?php  }else{ ?>
                     <?=$ls->inq_title?>
@@ -299,7 +302,7 @@
 
 
             <?php 
-              if($this->session->userdata['ss_user_id'] != "master"){
+              if($this->session->userdata['ss_user_id'] != "costomer"){
             ?>
 
             <form method="post" action="/ci/index.php/Controller_EC/insert_inquire">
@@ -319,7 +322,8 @@
               </table>
 
               <input type="hidden" name="pd_no" value="<?= $one_product[0]->pd_no ?>">
-              <input type="hidden" name="user_no" value="<?= $this->session->userdata['ss_user_no']?>">
+              <input type="hidden" name="user_no" 
+                value="<?= $this->session->userdata['ss_user_no']?>">
             </form>
 
             <?php
@@ -335,25 +339,14 @@
                       <h4 class="modal-title" id="myModalLabel">お問い合わせの返事</h4>
                     </div>
 
-                    <form action="" method="post">
+                    <form action="'/ci/index.php/Controller_EC/inquire_reply ?>'" method="post">
                     <div class="modal-body">
                             <table class="table">
                               <div id="getTag">
-    <h3>11111111<br/><span>22222</span>333333333</h3>
-</div>
-
-<script>
-$(function(){
-    var getTag = $("#getTag").html();
-        var getText = $('#rerid').val() ;
-
-});
-</script>
-
-
+                              </div>
                               <tr>
                                 <td width="140px">タイトル </td>
-                                <td><input type="text" class="form-control" name="inq_rp_title"></td>
+                                <td><input type="text" class="form-control" id="test1"  name="inq_rp_title" ></td>
                               </tr>
                               <tr>
                                 <td> 内容 </td>
@@ -381,16 +374,27 @@ $(function(){
           </div>
     </div>    
 
-    <hr><hr><hr>
 
         <script>
+        $(function(){
+            var getTag = $("#getTag").html();
+                var getText = $('#rerid').val() ;
+
+        });
+
           var click_sum = 0;
 
             $('#modal').click( function() {
-                //$('#result').html('');
+                //$('#test1').html('2');
                 //alert();
+                
+                //$temp = $("#test2").val();
+                //alert($temp);
+                //$('#test1').val() = $temp;
 
-                    var getTag = $("#getTag").html();
+                //$('#test1').val() = $("#test2").val();
+
+
         var getText = $('#rerid').val() ;
 
                 $.ajax({
@@ -407,11 +411,27 @@ $(function(){
             });
         </script>
 
+    <br><br><br><br><br>
     <!-- Footer -->
     <footer class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container">
-        <h6 align="center">ご来店ありがとうござす。</h6>
-      </div>
+      <div class="row">
+        <span></span>
+        <!-- <h6 align="center"> 現在のカート </h6>  -->
+        <?php $i=1;?>
+        <?php foreach($this->cart->contents() as $items): ?>
+          <div class="col-md-1">
+            <div class="thumbnail">
+              <a href="/ci/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
+                <img class="img-thumbnail" src="/ci<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
+              </a>
+            </div>
+          </div>
+        <?php $i++; ?>
+        <?php endforeach; ?>
+        <div class="col-md-1">
+          <br>☜ カート
+        </div>
+      </div>     
     </footer>
   </body>
 </html>

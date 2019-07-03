@@ -18,7 +18,6 @@
     <script src="js/bootstrap.min.js"></script>   
   </head>
   <body>
-
     <!-- TOP -->
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">  
@@ -137,7 +136,7 @@
             <div class="carousel-inner">
               <div class="item active">
                 <center>
-                  <img src="/ci/img/tee3.jpg" alt="Chania" style="height: 450px">
+                  <img class="img-thumbnail" src="/ci/img/tee3.jpg" alt="Chania" style="height: 450px">
                 </center><div class="carousel-caption">
                   <h3>WELCOME</h3>
                   <p>TEA is always so much fun!</p>
@@ -146,7 +145,7 @@
 
               <div class="item">
                 <center>
-                  <img src="/ci/img/redteee2.jpg" alt="Chicago" style="height: 450px">
+                  <img class="img-thumbnail" src="/ci/img/redteee2.jpg" alt="Chicago" style="height: 450px">
                 </center>
                 <div class="carousel-caption">
                   <h3>YOU</h3>
@@ -156,7 +155,7 @@
 
               <div class="item">
                 <center>
-                  <img src="/ci/img/redtea4.jpg" alt="New York" style="height: 450px">
+                  <img class="img-thumbnail" src="/ci/img/redtea4.jpg" alt="New York" style="height: 450px">
                 </center>
                 <div class="carousel-caption">
                   <h3>HAPPY TEA</h3>
@@ -186,7 +185,7 @@
             <div class="col-sm-6 col-md-4">
               <a href="/ci/index.php/Controller_EC/product/<?=$ls->pd_no?>">
                 <div class="thumbnail">
-                  <img src="/ci<?=$ls->pd_img?>" style="min-height:160px; height:90px;" />
+                  <img class="img-thumbnail" src="/ci<?=$ls->pd_img?>" style="min-height:160px; height:90px;" />
                   <div class="caption">
                     <h3><?=$ls->pd_name?></h3>
                     <h4>値段: <?=$ls->pd_price?></h4>
@@ -213,13 +212,27 @@
       </div>
     </div>
     <!-- CATEGORY / BIG PHOTO --><!-- CATEGORY / BIG PHOTO -->
-    <br><br><br>
-
+    <br><br><br><br><br>
     <!-- Footer -->
     <footer class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container">
-        <h6 align="center">ご来店ありがとうござす。</h6>
-      </div>
+      <div class="row">
+        <span></span>
+        <!-- <h6 align="center"> 現在のカート </h6>  -->
+        <?php $i=1;?>
+        <?php foreach($this->cart->contents() as $items): ?>
+          <div class="col-md-1">
+            <div class="thumbnail">
+              <a href="/ci/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
+                <img class="img-thumbnail" src="/ci<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
+              </a>
+            </div>
+          </div>
+        <?php $i++; ?>
+        <?php endforeach; ?>
+        <div class="col-md-1">
+          <br>☜ カート
+        </div>
+      </div>     
     </footer>
   </body>
 </html>

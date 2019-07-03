@@ -75,6 +75,13 @@
         return $query->result();
     }
 
+    // ユーザー全員の情報
+    public function get_all_user_info()
+    {
+        $query = $this->db->get('user_info'); 
+        return $query->result();
+    }
+
     // ユーザー一人の情報
     public function get_user_info($user_no)
     {
@@ -252,6 +259,13 @@
         $od_qty = $order_data['od_qty'];
         $query = "INSERT INTO order_info (od_no, pd_no, od_qty) 
                                 VALUES ('$od_no', '$pd_no', '$od_qty');";
+        $this->db->query($query);
+    }
+
+    // 注文の時、数量を減らす
+    public function update_qty($pd_no, $pd_stock)
+    {
+        $query = "UPDATE product_info SET pd_stock = '$pd_stock' WHERE pd_no = '$pd_no';";
         $this->db->query($query);
     }
 

@@ -170,6 +170,21 @@ class Controller_EC extends CI_Controller {
         $this->product($inquire_data['pd_no']);
     }
 
+    // お問い合わせの返事の登録（商品詳細ページ内）
+    public function insert_inquire_reply()
+    {
+        $inquire_data = array(
+            'inq_no' => (int)$this->input->post('inq_no'),
+            'inq_rp_title' => $this->input->post('inq_rp_title'),
+            'inq_rp_content' => $this->input->post('inq_rp_content')
+        );
+        
+        $this->load->model('Model_EC');
+        $this->Model_EC->insert_inquire($inquire_data);
+
+        $this->product($inquire_data['pd_no']);
+    }
+
     //　ログインページに移動
     public function login_page()
     {   
@@ -206,11 +221,13 @@ class Controller_EC extends CI_Controller {
             // 既存の非会員のカートの情報削除
             $this->cart->destroy();
             echo "<script>alert('ログインできました。');</script>";
+            $this->home();
         }else{
             echo "<script>alert('ログインできませんでした。正しい情報を入力してください。');</script>";
+            $this->login_page();
         }
 
-        $this->home();
+        
     }
 
     // ログアウト実行
@@ -225,7 +242,7 @@ class Controller_EC extends CI_Controller {
     {
     	$this->load->model('Model_EC');
 		$category_list['category'] = $this->Model_EC->get_category();
-
+        
         $this->load->view('signin_page', $category_list);
     }
 
@@ -244,10 +261,19 @@ class Controller_EC extends CI_Controller {
 		);
 		
 		$this->load->model('Model_EC');
-		$this->Model_EC->signin($signin_data);
-        echo "<script>alert('signin ok');</script>";
 
-        $this->home();
+        $user_info = $this->Model_EC->get_all_user_info();
+        foreach ($user_info as $ls) {
+            if ($ls->user_id == $this->input->post('user_id')) {
+                echo "<script>alert('同じアカウントがあります。ほかのIDを入力してください。');</script>";
+                $this->signin_page();
+                return ;
+            }
+        }
+
+		$this->Model_EC->signin($signin_data);
+        echo "<script>alert('会員登録完了　＞　ログインページに');</script>";
+        $this->login_page();
     }
 
     // MyPageに移動($varが 1-非会員/２-会員)
@@ -455,6 +481,16 @@ class Controller_EC extends CI_Controller {
                 'od_qty' => $ls['qty']
             );
             $this->Model_EC->insert_order_info($order_data);
+            $pd_info = $this->Model_EC->get_one_product($ls['id']);
+            $qty = (int)$pd_info[0]->pd_stock - (int)$ls['qty'];
+
+            if( $qty < 1 ) {
+                echo "<script>alert('在庫がありませんので、確認して注文してください。');</script>";
+                $this->home();
+                return ;
+            }
+
+            $this->Model_EC->update_qty((int)$ls['id'], $qty);
         }
 
         $this->Model_EC->delete_cart($user_no);
@@ -496,6 +532,16 @@ class Controller_EC extends CI_Controller {
             'od_qty' => $this->input->post('od_qty')
         );
         $this->Model_EC->insert_order_info($order_data);
+        $pd_info = $this->Model_EC->get_one_product($this->input->post('pd_no'));
+        $qty = (int)$pd_info[0]->pd_stock - (int)$this->input->post('od_qty');
+
+        if( $qty < 1 ) {
+            echo "<script>alert('在庫がありませんので、確認して注文してください。');</script>";
+            $this->home();
+            return ;
+        }
+
+        $this->Model_EC->update_qty((int)$this->input->post('pd_no'), $qty);
 
         $data_list['category'] = $this->Model_EC->get_category();
         $data_list['user_info'] = $this->Model_EC->get_user_info((int)$this->session->userdata['ss_user_no']);

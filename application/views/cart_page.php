@@ -213,11 +213,27 @@
     </div>
     <!-- CATEGORY / BIG PHOTO --><!-- CATEGORY / BIG PHOTO --> 
 
+    <br><br><br><br><br>
     <!-- Footer -->
     <footer class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container">
-        <h6 align="center">ご来店ありがとうござす。</h6>
-      </div>
+      <div class="row">
+        <span></span>
+        <!-- <h6 align="center"> 現在のカート </h6>  -->
+        <?php $i=1;?>
+        <?php foreach($this->cart->contents() as $items): ?>
+          <div class="col-md-1">
+            <div class="thumbnail">
+              <a href="/ci/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
+                <img class="img-thumbnail" src="/ci<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
+              </a>
+            </div>
+          </div>
+        <?php $i++; ?>
+        <?php endforeach; ?>
+        <div class="col-md-1">
+          <br>☜ カート
+        </div>
+      </div>     
     </footer>
   </body>
 </html>
