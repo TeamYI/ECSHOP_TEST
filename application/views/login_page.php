@@ -38,17 +38,17 @@
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様には会員登録お勧めします。</a></li>
-                <li><a href="/ci/index.php/Controller_EC/login_page">Login</a></li>
-                <li><a href="/ci/index.php/Controller_EC/signin_page">Sign In</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">Cart</a></li>
+                <li><a href="/ci/index.php/Controller_EC/login_page">ログイン</a></li>
+                <li><a href="/ci/index.php/Controller_EC/signin_page">会員登録</a></li>
+                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
                 <li><a href="/ci/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ci/index.php/Controller_EC/logout">Logout</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">Cart</a></li>
+                   <li><a href="/ci/index.php/Controller_EC/logout">ログアウト</a></li>
+                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
                 <li><a href="/ci/index.php/Controller_EC/mypage/2">MyPage</a></li>       
             <?php
               }
