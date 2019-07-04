@@ -59,7 +59,7 @@ class Controller_EC extends CI_Controller {
     // 商品画像の登録
     public function do_upload()
     {
-        $config['upload_path'] = './';
+        $config['upload_path'] = './img';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '100';
         $config['max_width']  = '1024';
