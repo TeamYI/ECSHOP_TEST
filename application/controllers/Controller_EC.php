@@ -470,10 +470,12 @@ class Controller_EC extends CI_Controller {
 
         $user_no = (int)$this->session->userdata['ss_user_no'];
         $od_address = $this->input->post('user_address');
-        
+
+        $this->db->trans_start(); //tranjaction
         $this->Model_EC->insert_order($user_no, $od_address);
         $od_no = $this->Model_EC->get_order();
 
+        
         foreach ( $this->cart->contents() as $ls) {
             $order_data = array(
                 'od_no' => $od_no[0]->od_no,
@@ -486,12 +488,14 @@ class Controller_EC extends CI_Controller {
 
             if( $qty < 1 ) {
                 echo "<script>alert('在庫がありませんので、確認して注文してください。');</script>";
+                $this->db->trans_rollback(); //tranjaction
                 $this->home();
                 return ;
             }
 
             $this->Model_EC->update_qty((int)$ls['id'], $qty);
         }
+        $this->db->trans_complete(); //tranjaction
 
         $this->Model_EC->delete_cart($user_no);
 
@@ -523,6 +527,7 @@ class Controller_EC extends CI_Controller {
         $user_no = (int)$this->session->userdata['ss_user_no'];
         $od_address = $this->input->post('user_address');
 
+        $this->db->trans_start(); //tranjaction
         $this->Model_EC->insert_order($user_no, $od_address);
         $od_no = $this->Model_EC->get_order();
 
@@ -537,9 +542,13 @@ class Controller_EC extends CI_Controller {
 
         if( $qty < 1 ) {
             echo "<script>alert('在庫がありませんので、確認して注文してください。');</script>";
+
+            $this->db->trans_rollback(); //tranjaction
             $this->home();
             return ;
         }
+
+        $this->db->trans_complete(); //tranjaction
 
         $this->Model_EC->update_qty((int)$this->input->post('pd_no'), $qty);
 
