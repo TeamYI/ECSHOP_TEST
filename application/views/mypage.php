@@ -150,10 +150,10 @@
                   <td width="100px">連絡先</td>
                   <td><?= $user_info[0]->user_phoneNumber ?></td>
                 </tr>
-                <tr>
+<!--                 <tr>
                   <td width="100px">誕生日</td>
                   <td><?= $user_info[0]->user_birth ?></td>
-                </tr>
+                </tr> -->
                 <tr class="active">
                   <td width="100px">住所</td>
                   <td><?= $user_info[0]->user_address ?></td>
