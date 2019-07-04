@@ -37,17 +37,17 @@
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様には会員登録お勧めします。</a></li>
-                <li><a href="/ci/index.php/Controller_EC/login_page">Login</a></li>
-                <li><a href="/ci/index.php/Controller_EC/signin_page">Sign In</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">Cart</a></li>
+                <li><a href="/ci/index.php/Controller_EC/login_page">ログイン</a></li>
+                <li><a href="/ci/index.php/Controller_EC/signin_page">会員登録</a></li>
+                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
                 <li><a href="/ci/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ci/index.php/Controller_EC/logout">Logout</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">Cart</a></li>
+                   <li><a href="/ci/index.php/Controller_EC/logout">ログアウト</a></li>
+                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
                 <li><a href="/ci/index.php/Controller_EC/mypage/2">MyPage</a></li>       
             <?php
               }
@@ -143,8 +143,8 @@
                 <center>
                   <img class="img-thumbnail" src="/ci/img/tee3.jpg" alt="Chania" style="height: 450px">
                 </center><div class="carousel-caption">
-                  <h3>WELCOME</h3>
-                  <p>TEA is always so much fun!</p>
+                  <h3>お客様</h3>
+                  <p>ご来店ありがとうございます！</p>
                 </div>
               </div>
 
@@ -153,8 +153,8 @@
                   <img class="img-thumbnail" src="/ci/img/redteee2.jpg" alt="Chicago" style="height: 450px">
                 </center>
                 <div class="carousel-caption">
-                  <h3>YOU</h3>
-                  <p>Thank you!</p>
+                  <h3>本場のお茶の味</h3>
+                  <p>味わってみますか？</p>
                 </div>
               </div>
 
@@ -163,8 +163,8 @@
                   <img class="img-thumbnail" src="/ci/img/redtea4.jpg" alt="New York" style="height: 450px">
                 </center>
                 <div class="carousel-caption">
-                  <h3>HAPPY TEA</h3>
-                  <p>We love the TEA!</p>
+                  <h3>いつもお客様のため</h3>
+                  <p>頑ばります！</p>
                 </div>
               </div>
             </div>
