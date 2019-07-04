@@ -13,7 +13,7 @@ class Controller_EC extends CI_Controller {
 
     // 모든 테스트를 하는 곳 (삭제할거임)
     public function test(){
-        $this->load->view('test');
+        $this->load->view('upload_form');
     }
      
     // 에이젝스 테스트 (삭제할거임)
