@@ -130,7 +130,7 @@
           <table class="table table-striped table-bordered table-hover">
           <thead>
           <tr class="success">
-              <th align="center" width="65px">取消し</th>
+<!--               <th align="center" width="65px">取消し</th> -->
               <th>写真</th>
               <th>商品名</th>
               <th>値段</th>
@@ -143,7 +143,7 @@
           <?php foreach($this->cart->contents() as $items): ?>
           <input type="hidden" name="rowid[]" value="<?php echo $items['rowid'];?>" />
           <tr>
-            <td align="center"><input type="checkbox" name="del[]" value="<?php echo $i - 1;?>" /></td>
+<!--             <td align="center"><input type="checkbox" name="del[]" value="<?php echo $i - 1;?>" /></td> -->
             <td align="center"><img src="/ci<?php echo $items['img']; ?>"style="min-height:80px; height:50px;" /></td>
             <td><?php echo $items['name']; ?></td>
             <td><?php echo number_format($items['price']); ?>円</td>
@@ -154,13 +154,13 @@
           </tr>
           <?php $i++; ?>
           <?php endforeach; ?>
-          <td colspan="4" align="center"> 総合計</td>
+          <td colspan="3" align="center"> 総合計</td>
           <td><?php echo number_format($this->cart->total_items());?>個</td>
           <td><?php echo number_format($this->cart->total());?>円</td>
           </tbody>
           <tfoot>
           <tr>
-              <td colspan="6" style="text-align: center">
+              <td colspan="5" style="text-align: center">
                   <input type="button" class="btn btn-success" onclick="location.href=
                   '/ci/index.php/Controller_EC/order_page'" value="購入" />
                   <input type="button" class="btn btn-default" onclick="location.href=
