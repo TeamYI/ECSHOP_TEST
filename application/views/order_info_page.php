@@ -7,7 +7,7 @@
 
     <title>お茶屋さん</title>
     <!-- bootstrap -->
-    <link href="/ci/boot/css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="/ECSHOP_TEST/boot/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
     <style type="text/css"> body {padding-top: 50px;} </style>
@@ -38,18 +38,18 @@
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様には会員登録お勧めします。</a></li>
-                <li><a href="/ci/index.php/Controller_EC/login_page">ログイン</a></li>
-                <li><a href="/ci/index.php/Controller_EC/signin_page">会員登録</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
-                <li><a href="/ci/index.php/Controller_EC/order_info_page">注文情報</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ci/index.php/Controller_EC/logout">ログアウト</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
-                <li><a href="/ci/index.php/Controller_EC/mypage/2">MyPage</a></li>       
+                   <li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
             <?php
               }
             ?>
@@ -66,7 +66,7 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-1">
-          <a href="/ci/index.php/Controller_EC/home"><img src="/ci/img/logo.png" width="230px"></a>
+          <a href="/ECSHOP_TEST/index.php/Controller_EC/home"><img src="/ECSHOP_TEST/img/logo.png" width="230px"></a>
         </div>
         <div class="col-md-5">
           <form class="navbar-form navbar-right">
@@ -117,7 +117,7 @@
           <!-- <-- 메뉴목록 --> 
             <ul class="list-group">
               <?php foreach($category as $ls) : ?>
-                 <li class="list-group-item"><a href="/ci/index.php/Controller_EC/category/<?=$ls->cg_no?>"><?=$ls->cg_name?></a></li>
+                 <li class="list-group-item"><a href="/ECSHOP_TEST/index.php/Controller_EC/category/<?=$ls->cg_no?>"><?=$ls->cg_name?></a></li>
               <?php endforeach ?>
             </ul>
           </div>
@@ -127,7 +127,7 @@
           <h3>非会員注文情報</h3><hr>
 
           <!-- 로그인폼 --><!-- 로그인폼 -->
-          <form id="order_name" action="/ci/index.php/Controller_EC/check_order_info_by_order_name" method="post">
+          <form id="order_name" action="/ECSHOP_TEST/index.php/Controller_EC/check_order_info_by_order_name" method="post">
             <h4>注文者名で照会 (機能準備中)</h4>
             <div class="input-group double-input">
             <input type="text" name="order_name" placeholder="注文者名" class="form-control" />
@@ -140,7 +140,7 @@
           <br>
 
           <!-- 로그인폼 --><!-- 로그인폼 -->
-          <form id="order_no" action="/ci/index.php/Controller_EC/check_order_info_by_order_no" method="post">
+          <form id="order_no" action="/ECSHOP_TEST/index.php/Controller_EC/check_order_info_by_order_no" method="post">
             <h4>注文番号で照会</h4>
             <div class="input-group double-input">
             <input type="text" name="order_no" placeholder="注文番号" class="form-control" />
@@ -168,8 +168,8 @@
         <?php foreach($this->cart->contents() as $items): ?>
           <div class="col-md-1">
             <div class="thumbnail">
-              <a href="/ci/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
-                <img class="img-thumbnail" src="/ci<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
+              <a href="/ECSHOP_TEST/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
+                <img class="img-thumbnail" src="/ECSHOP_TEST<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
               </a>
             </div>
           </div>

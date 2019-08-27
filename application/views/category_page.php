@@ -7,7 +7,7 @@
 
     <title>お茶屋さん</title>
     <!-- bootstrap -->
-    <link href="/ci/boot/css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="/ECSHOP_TEST/boot/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
     <style type="text/css"> body {padding-top: 50px;} </style>
@@ -38,18 +38,18 @@
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様には会員登録お勧めします。</a></li>
-                <li><a href="/ci/index.php/Controller_EC/login_page">ログイン</a></li>
-                <li><a href="/ci/index.php/Controller_EC/signin_page">会員登録</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
-                <li><a href="/ci/index.php/Controller_EC/order_info_page">注文情報</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ci/index.php/Controller_EC/logout">ログアウト</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
-                <li><a href="/ci/index.php/Controller_EC/mypage/2">MyPage</a></li>       
+                   <li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
             <?php
               }
             ?>
@@ -66,7 +66,7 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-1">
-          <a href="/ci/index.php/Controller_EC/home"><img src="/ci/img/logo.png" width="230px"></a>
+          <a href="/ECSHOP_TEST/index.php/Controller_EC/home"><img src="/ECSHOP_TEST/img/logo.png" width="230px"></a>
         </div>
         <div class="col-md-5">
           <form class="navbar-form navbar-right">
@@ -117,7 +117,7 @@
           <!-- <-- 메뉴목록 --> 
             <ul class="list-group">
               <?php foreach($category as $ls) : ?>
-                 <li class="list-group-item"><a href="/ci/index.php/Controller_EC/category/<?=$ls->cg_no?>"><?=$ls->cg_name?></a></li>
+                 <li class="list-group-item"><a href="/ECSHOP_TEST/index.php/Controller_EC/category/<?=$ls->cg_no?>"><?=$ls->cg_name?></a></li>
               <?php endforeach ?>
             </ul>
           </div>
@@ -131,17 +131,17 @@
           <?php foreach($product as $ls) : ?>
 
             <div class="col-sm-6 col-md-4">
-              <a href="/ci/index.php/Controller_EC/product/<?=$ls->pd_no?>">
+              <a href="/ECSHOP_TEST/index.php/Controller_EC/product/<?=$ls->pd_no?>">
                 <div class="thumbnail">
-                  <img src="/ci<?=$ls->pd_img?>" style="min-height:160px; height:90px;" />
+                  <img src="/ECSHOP_TEST<?=$ls->pd_img?>" style="min-height:160px; height:90px;" />
                   <div class="caption">
                     <h3><?=$ls->pd_name?></h3>
                     <h4>値段 : <?=$ls->pd_price?></h4>
                     <h4>在庫 : <?=$ls->pd_stock?></h4>
                     <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 180px;">説明 : <?=$ls->pd_comment?></p>
                     <p>　
-                      <a href="/ci/index.php/Controller_EC/buy_page/<?=$ls->pd_no?>" class="btn btn-primary" role="button">購入</a>
-                      <a href="/ci/index.php/Controller_EC/quick_cart/<?=$ls->pd_no?>" class="btn btn-success" role="button">カゴへ</a>
+                      <a href="/ECSHOP_TEST/index.php/Controller_EC/buy_page/<?=$ls->pd_no?>" class="btn btn-primary" role="button">購入</a>
+                      <a href="/ECSHOP_TEST/index.php/Controller_EC/quick_cart/<?=$ls->pd_no?>" class="btn btn-success" role="button">カゴへ</a>
                       <!-- <a href="#" class="btn btn-danger" role="button">♡</a> -->
                     </p>
                   </div>
@@ -169,8 +169,8 @@
         <?php foreach($this->cart->contents() as $items): ?>
           <div class="col-md-1">
             <div class="thumbnail">
-              <a href="/ci/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
-                <img class="img-thumbnail" src="/ci<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
+              <a href="/ECSHOP_TEST/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
+                <img class="img-thumbnail" src="/ECSHOP_TEST<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
               </a>
             </div>
           </div>

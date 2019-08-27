@@ -7,7 +7,7 @@
 
     <title>お茶屋さん</title>
     <!-- bootstrap -->
-    <link href="/ci/boot/css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="/ECSHOP_TEST/boot/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
     <style type="text/css"> body {padding-top: 50px;} </style>
@@ -38,18 +38,18 @@
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様には会員登録お勧めします。</a></li>
-                <li><a href="/ci/index.php/Controller_EC/login_page">ログイン</a></li>
-                <li><a href="/ci/index.php/Controller_EC/signin_page">会員登録</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
-                <li><a href="/ci/index.php/Controller_EC/order_info_page">注文情報</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ci/index.php/Controller_EC/logout">ログアウト</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
-                <li><a href="/ci/index.php/Controller_EC/mypage/2">MyPage</a></li>       
+                   <li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
             <?php
               }
             ?>
@@ -66,7 +66,7 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-1">
-          <a href="/ci/index.php/Controller_EC/home"><img src="/ci/img/logo.png" width="230px"></a>
+          <a href="/ECSHOP_TEST/index.php/Controller_EC/home"><img src="/ECSHOP_TEST/img/logo.png" width="230px"></a>
         </div>
         <div class="col-md-5">
           <form class="navbar-form navbar-right">
@@ -117,7 +117,7 @@
           <!-- <-- 메뉴목록 --> 
             <ul class="list-group">
               <?php foreach($category as $ls) : ?>
-                 <li class="list-group-item"><a href="/ci/index.php/Controller_EC/category/<?=$ls->cg_no?>"><?=$ls->cg_name?></a></li>
+                 <li class="list-group-item"><a href="/ECSHOP_TEST/index.php/Controller_EC/category/<?=$ls->cg_no?>"><?=$ls->cg_name?></a></li>
               <?php endforeach ?>
             </ul>
           </div>
@@ -125,27 +125,27 @@
         <!-- 카테고리, 큰사진 중 큰사진 및 상품태그 시작 -->
         <div class="col-md-6">
         <?php foreach($one_product as $ls) : ?>
-          <img width="400" src="/ci<?=$ls->pd_img?>" alt="...">
+          <img width="400" src="/ECSHOP_TEST<?=$ls->pd_img?>" alt="...">
         <?php endforeach ?>  
         </div>
         
 <script type="text/javascript">
   function mySubmit(index) {
     if (index == 1) {
-      document.myForm.action='/ci/index.php/Controller_EC/buy_page/<?= $one_product[0]->pd_no ?>';
+      document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/buy_page/<?= $one_product[0]->pd_no ?>';
     }
     if (index == 2) {
 
       var con_test = confirm("カゴへいきますか？");
       if(con_test == true){
-        document.myForm.action='/ci/index.php/Controller_EC/cart_page/2';
+        document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/cart_page/2';
       }
       else if(con_test == false){
-        document.myForm.action='/ci/index.php/Controller_EC/cart_page/3';
+        document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/cart_page/3';
       }
     }
     if (index == 3) {
-      document.myForm.action='/ci/index.php/Controller_EC/like';
+      document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/like';
     }
     document.myForm.submit();
   }
@@ -192,7 +192,7 @@
               <?php
                 if( $ls->pd_page_img != '' ){
               ?>
-                <img width="350" src="/ci<?=$ls->pd_page_img?>" alt="...">
+                <img width="350" src="/ECSHOP_TEST<?=$ls->pd_page_img?>" alt="...">
               <?php
               }
               ?>
@@ -227,7 +227,7 @@
             <?php foreach($review as $ls) : ?>
               <table class="table table-bordered table-hover">
                 <tr class="success">
-                  <td width="100px"><img style="min-height:50px; height:50px;" src="/ci<?=$ls->rev_img?>"></td>
+                  <td width="100px"><img style="min-height:50px; height:50px;" src="/ECSHOP_TEST<?=$ls->rev_img?>"></td>
                   <td width="100px"><?=$ls->pd_name?></td>
                   <td><?=$ls->rev_explain?></td>
                   <td width="100px"><?=$ls->user_name?></td>
@@ -305,7 +305,7 @@
               if($this->session->userdata['ss_user_id'] != "costomer"){
             ?>
 
-            <form method="post" action="/ci/index.php/Controller_EC/insert_inquire">
+            <form method="post" action="/ECSHOP_TEST/index.php/Controller_EC/insert_inquire">
 
               <table class="table">
                 <tr>
@@ -339,7 +339,7 @@
                       <h4 class="modal-title" id="myModalLabel">お問い合わせの返事</h4>
                     </div>
 
-                    <form action="'/ci/index.php/Controller_EC/inquire_reply ?>'" method="post">
+                    <form action="'/ECSHOP_TEST/index.php/Controller_EC/inquire_reply ?>'" method="post">
                     <div class="modal-body">
                             <table class="table">
                               <div id="getTag">
@@ -398,7 +398,7 @@
         var getText = $('#rerid').val() ;
 
                 $.ajax({
-                    url: "http://www.localhost/ci/index.php/Controller_EC/ajax_receive",
+                    url: "http://www.localhost/ECSHOP_TEST/index.php/Controller_EC/ajax_receive",
                     dataType:'text',
                     type:'POST',
                     data:{
@@ -421,8 +421,8 @@
         <?php foreach($this->cart->contents() as $items): ?>
           <div class="col-md-1">
             <div class="thumbnail">
-              <a href="/ci/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
-                <img class="img-thumbnail" src="/ci<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
+              <a href="/ECSHOP_TEST/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
+                <img class="img-thumbnail" src="/ECSHOP_TEST<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
               </a>
             </div>
           </div>

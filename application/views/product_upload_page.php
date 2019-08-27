@@ -7,7 +7,8 @@
 
     <title>お茶屋さん</title>
     <!-- bootstrap -->
-    <link href="/ci/boot/css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="/ECSHOP_TEST/boot/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/ECSHOP_TEST/boot/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
     <style type="text/css"> body {padding-top: 50px;} </style>
@@ -38,18 +39,18 @@
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様には会員登録お勧めします。</a></li>
-                <li><a href="/ci/index.php/Controller_EC/login_page">ログイン</a></li>
-                <li><a href="/ci/index.php/Controller_EC/signin_page">会員登録</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
-                <li><a href="/ci/index.php/Controller_EC/order_info_page">注文情報</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ci/index.php/Controller_EC/logout">ログアウト</a></li>
-                <li><a href="/ci/index.php/Controller_EC/cart_page/1">カート</a></li>
-                <li><a href="/ci/index.php/Controller_EC/mypage/2">MyPage</a></li>       
+                   <li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
             <?php
               }
             ?>
@@ -66,7 +67,7 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-1">
-          <a href="/ci/index.php/Controller_EC/home"><img src="/ci/img/logo.png" width="230px"></a>
+          <a href="/ECSHOP_TEST/index.php/Controller_EC/home"><img src="/ECSHOP_TEST/img/logo.png" width="230px"></a>
         </div>
         <div class="col-md-5">
           <form class="navbar-form navbar-right">
@@ -117,7 +118,7 @@
           <!-- <-- 메뉴목록 --> 
             <ul class="list-group">
               <?php foreach($category as $ls) : ?>
-                 <li class="list-group-item"><a href="/ci/index.php/Controller_EC/category/<?=$ls->cg_no?>"><?=$ls->cg_name?></a></li>
+                 <li class="list-group-item"><a href="/ECSHOP_TEST/index.php/Controller_EC/category/<?=$ls->cg_no?>"><?=$ls->cg_name?></a></li>
               <?php endforeach ?>
             </ul>
           </div>
@@ -127,7 +128,7 @@
 
           <!-- 카테고리 등록-->
         <h4>カテゴリ登録</h4>
-          <form id="order_name" action="/ci/index.php/Controller_EC/upload_category" method="post">
+          <form id="order_name" action="/ECSHOP_TEST/index.php/Controller_EC/upload_category" method="post">
             <div class="input-group double-input">
               <span class="input-group-btn">
                 <div class="dropdown">
@@ -157,7 +158,7 @@
           <!-- 로그인폼 --><!-- 로그인폼 -->
 
             <!-- 상품등록 - 사진등록 -->
-            <?php echo form_open_multipart('http://192.168.128.163/ci/index.php/Controller_EC/do_upload');?>
+            <?php echo form_open_multipart('http://192.168.128.197:8000/ECSHOP_TEST/index.php/Controller_EC/do_upload');?>
               <div class="input-group double-input">
                 <span class="input-group-btn">
                 <input class="btn btn-default" type="file" name="userfile" /></span>
@@ -170,8 +171,8 @@
 
  
 
-          <form id="order_name" action="/ci/index.php/Controller_EC/upload_product" method="post">
-            
+          <form id="order_name" action="/ECSHOP_TEST/index.php/Controller_EC/upload_product" method="post">
+
             <div>
               <input type="hidden" class="form-control" name="pd_img" value="<?php if(isset($img['img_path'])) echo $img['img_path']; ?>">
             </div>
@@ -258,7 +259,8 @@
                 //$('#result').html('');
                 
                 $.ajax({
-                    url: "http://www.localhost/ci/index.php/Controller_EC/ajax_receive",
+                    url: "http://www.localhost/ECSHOP_TEST/index.php/Controller_EC/ajax_receive",
+                    url: "http://www.localhost/ECSHOP_TEST/index.php/Controller_EC/ajax_receive",
                     dataType:'text',
                     type:'POST',
                     data:{
@@ -288,8 +290,9 @@
         <?php foreach($this->cart->contents() as $items): ?>
           <div class="col-md-1">
             <div class="thumbnail">
-              <a href="/ci/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
-                <img class="img-thumbnail" src="/ci<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
+              <a href="/ECSHOP_TEST/index.php/Controller_EC/product/<?php echo $items['id']; ?>">
+                <img class="img-thumbnail" src="/ECSHOP_TEST<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
+                <img class="img-thumbnail" src="/ECSHOP_TEST<?php echo $items['img']; ?>"style="min-height:50px; height: 50px" />
               </a>
             </div>
           </div>
