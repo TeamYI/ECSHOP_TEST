@@ -15,7 +15,8 @@
     <!-- bootstrap carosel -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>   
+    <script src="js/bootstrap.min.js"></script>
+	<script src="/ECSHOP_TEST/js/ecshop.js"></script>
   </head>
   <body>
 
@@ -40,15 +41,15 @@
                    様には会員登録お勧めします。</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
-                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cartAll">カート</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
-                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+				<li><a href="#" onclick="logout()">ログアウト</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cartAll">カート</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
             <?php
               }
@@ -130,27 +131,26 @@
         </div>
         
 <script type="text/javascript">
-  function mySubmit(index) {
-    if (index == 1) {
-      document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/buy_page/<?= $one_product[0]->pd_no ?>';
-    }
-    if (index == 2) {
-
-      var con_test = confirm("カゴへいきますか？");
-      if(con_test == true){
-        document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/cart_page/2';
-      }
-      else if(con_test == false){
-        document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/cart_page/3';
-      }
-    }
-    if (index == 3) {
-      document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/like';
-    }
-    document.myForm.submit();
-  }
+  //function mySubmit(index) {
+  //  if (index == 1) {
+  //    document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/buy_page/<?//= $one_product[0]->pd_no ?>//';
+  //  }
+  //  if (index == 2) {
+  //
+  //    var con_test = confirm("カゴへいきますか？");
+  //    if(con_test == true){
+  //      document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/cart_page/2';
+  //    }
+  //    else if(con_test == false){
+  //      document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/cart_page/3';
+  //    }
+  //  }
+  //  if (index == 3) {
+  //    document.myForm.action='/ECSHOP_TEST/index.php/Controller_EC/like';
+  //  }
+  //  document.myForm.submit();
+  //}
 </script>
-
         <div class="col-md-2">   
           <form name="myForm" method="post">
             <h1><?= $one_product[0]->pd_name ?></h1>
@@ -158,15 +158,14 @@
             <h3>在庫 : <?= $one_product[0]->pd_stock ?></h3>
             <p>説明 : <?= $one_product[0]->pd_comment ?></p>
 
-            <input type="text" class="form-control" name="qty" placeholder="qty" autofocus><br>
+            <input type="text" class="form-control" name="qty" placeholder="qty" value="1" autofocus ><br>
 
             <input type="hidden" class="form-control" name="pd_price" value="<?=$ls->pd_price?>" autofocus>
             <input type="hidden" class="form-control" name="pd_name" value="<?=$ls->pd_name?>" autofocus>
             <input type="hidden" class="form-control" name="pd_no" value="<?=$ls->pd_no?>" autofocus>
             <p>
-              <input type="button" class="btn btn-primary" value="購入" onclick='mySubmit(1)' />
-              <input type="button" class="btn btn-success" value="カゴへ" onclick='mySubmit(2)' 
-              />
+              <input type="button" class="btn btn-primary" value="購入" onclick="moveOrderPage('<?=$ls->pd_stock?>','<?=$ls->pd_no?>')" />
+              <input type="button" class="btn btn-success" value="カゴへ" onclick="moveCartPage('<?=$ls->pd_stock?>','<?=$ls->pd_no?>')" />
               <!-- <input type="button" class="btn btn-danger" value="♡" onclick='mySubmit(3)' /> -->
             </p>
           </form>

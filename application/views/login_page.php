@@ -15,7 +15,8 @@
     <!-- bootstrap carosel -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>   
+    <script src="js/bootstrap.min.js"></script>
+	<script src="/ECSHOP_TEST/js/ecshop.js"></script>
   </head>
   <body>
 
@@ -40,15 +41,15 @@
                    様には会員登録お勧めします。</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
-                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cartAll">カート</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
-                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+				<li><a href="#" onclick="logout()">ログアウト</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cartAll">カート</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
             <?php
               }

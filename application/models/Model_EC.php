@@ -96,17 +96,20 @@
     {
         $query = $this->db->get_where('product_info', array(
             'pd_no' => $product_no
-        )); 
+        ));
+//        print_r();
         return $query->result();
     }
 
     // ユーザーのカートの情報
-    public function get_cart()
+    public function get_cart($user_no)
     {
-        $user_no = $this->session->userdata['ss_user_no'];  
-        $ok = $this->db->get_where('cart', array(
-            'user_no' => $user_no
-        )); 
+        $query = "select * from cart as a 
+				  left join product_info as b
+				  on a.pd_no = b.pd_no
+				  where a.user_no = $user_no";
+
+        $ok = $this->db->query($query);
         return $ok->result();
     }
 
@@ -124,11 +127,12 @@
     {
         $user_id = $login_data['user_id'];
         $user_pw = $login_data['user_pw'];
-
-        $query = $this->db->get_where('user_info', array(
-            'user_id' => $user_id,
-            'user_pw' => $user_pw
-        )); 
+		print_r($user_pw);
+//        $query = $this->db->get_where('user_info', array(
+//            'user_id' => $user_id,
+//            'user_pw' => $user_pw
+//        ));
+		$query = $this->db->query("select * from user_info where (user_id='$user_id') and (user_pw ='$user_pw')") ;
         $num = $query->num_rows();
         // アカウントとパスワードがあったら１なかったら２
         return $num;
@@ -243,24 +247,67 @@
         $this->db->query($query);
     }
 
+
+
     // order_main　注文確定
-    public function insert_order($user_no, $od_address)
+    public function insert_order($order_info)
     {
-        $query = "INSERT INTO order_main (user_no, od_date, od_address) 
-                            VALUES ('$user_no', NOW(), '$od_address');";
+
+		$user_no = $order_info["user_no"] ;
+
+		$order_name = $order_info["order_name"] ;
+		$order_email = $order_info["order_email"];
+		$order_hp = $order_info["order_hp"] ;
+		$order_price = $order_info["order_price"];
+		$payment_option = $order_info["payment_option"] ;
+
+    	$query = "insert into order_main (user_no,od_name,od_email,od_hp, od_price, payment_option, payment_check,delivery_status )
+				  values('$user_no', '$order_name','$order_email','$order_hp','$order_price',$payment_option,'X','配送準備')";
+
         $this->db->query($query);
+
+        $this->insert_order_info($order_info);
+        $this->insert_delivery_info($order_info);
     }
 
     // order_info　注文確定　
-    public function insert_order_info($order_data)
+    public function insert_order_info($order_info)
     {
-        $od_no = $order_data['od_no'];
-        $pd_no = $order_data['pd_no'];
-        $od_qty = $order_data['od_qty'];
-        $query = "INSERT INTO order_info (od_no, pd_no, od_qty) 
-                                VALUES ('$od_no', '$pd_no', '$od_qty');";
-        $this->db->query($query);
+    	$od_no = $this->get_order();
+
+		foreach ($order_info["order_product"] as $product)
+		{
+			print_r($product);
+			$pd_no = $product['pd_no'];
+			$od_qty = $product['od_qty'];
+
+			$query = "INSERT INTO order_info (od_no, pd_no, od_qty)
+									VALUES ('$od_no', '$pd_no', '$od_qty')";
+
+			$this->db->query($query);
+
+			$pd_info = $this->get_one_product($pd_no);
+            $qty = (int)$pd_info[0]->pd_stock - (int)$od_qty;
+			$this->update_qty((int)$pd_no, $qty);
+
+		}
+
     }
+
+    // delivery_info　注文確定
+	public function insert_delivery_info($order_info)
+	{
+		$od_no = $this->get_order();
+
+		$receiver_name = $order_info["receiver_name"] ;
+		$receiver_hp = $order_info["receiver_hp"] ;
+		$receiver_address = $order_info["receiver_address"];
+
+		$query = "insert into delivery_info (od_no,receiver_name,receiver_hp,receiver_address)
+				  values($od_no, '$receiver_name','$receiver_hp','$receiver_address')";
+		$this->db->query($query);
+
+	}
 
     // 注文の時、数量を減らす
     public function update_qty($pd_no, $pd_stock)
@@ -273,16 +320,22 @@
     public function get_order()
     {
         $query = "SELECT od_no FROM order_main ORDER BY od_no DESC LIMIT 1";
-        return $this->db->query($query)->result();
+		$result = $this->db->query($query)->result();
+		$result = $result[0]->od_no;
+        return $result;
     }
 
     // order_main　注文履歴　（ユーザー一人の）
     public function get_order_main($user_no)
     {
-        $query = $this->db->order_by("od_no", "desc")->get_where('order_main', array(
-            'user_no' => $user_no
-        )); 
-        return $query->result();
+        $query = "select * from order_main as a 
+				  left join delivery_info as b
+				  on a.od_no  = b.od_no 
+				  where a.user_no = $user_no";
+
+        $result = $this->db->query($query);
+
+        return $result->result();
     }
 
     // order_info　注文履歴
@@ -319,15 +372,26 @@
     //     return $query->result();
     // }
 
-    // public function update_cart_db($cart_data)
-    // {
-    //     $user_no = $cart_data['user_no'];
-    //     $pd_no = $cart_data['pd_no'];
-    //     $qty = $cart_data['qty'];
+     public function update_cart_db($cart_data)
+     {
+         $user_no = $cart_data['user_no'];
+         $pd_no = $cart_data['pd_no'];
+         $qty = $cart_data['qty'];
 
-    //     $query = "UPDATE cart SET qty='$qty' WHERE pd_no = '$pd_no' and user_no = '$user_no'";
-    //     $this->db->query($query);
-    // }
+         $query = "UPDATE cart SET qty='$qty' WHERE pd_no = '$pd_no' and user_no = '$user_no'";
+         $this->db->query($query);
+     }
+
+     public function updateUserInfo($data, $user_id)
+	{
+		$query = $this->db->update('user_info', $data, "user_id = '$user_id'");
+
+		if($query){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
     // public function check_cart_db($cart_data)
     // {

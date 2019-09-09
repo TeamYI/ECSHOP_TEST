@@ -15,7 +15,8 @@
     <!-- bootstrap carosel -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>   
+    <script src="js/bootstrap.min.js"></script>
+	<script src="/ECSHOP_TEST/js/ecshop.js"></script>
   </head>
   <body>
 
@@ -40,15 +41,15 @@
                    様には会員登録お勧めします。</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
-                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cartAll">カート</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
-                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+				<li><a href="#s" onclick="logout()">ログアウト</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cartAll">カート</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
             <?php
               }
@@ -165,7 +166,7 @@
         <div class="col-md-10">
           <h4>注文者情報</h4>
           
-          <form id="login-form" action="/ECSHOP_TEST/index.php/Controller_EC/quick_order" method="post">
+          <form id="login-form" action="/ECSHOP_TEST/index.php/Controller_EC/order" method="post">
 
             <input type="hidden" value="<?= $product[0]->pd_no ?>" name="pd_no">
             <input type="hidden" value="<?php if (isset($od_qty['od_qty'])) {
@@ -179,27 +180,27 @@
               if($this->session->userdata['ss_user_no']== 0){
             ?>
                 <tr>
-                  <td width="100px">名前</td><td><input class="form-control" type="text" name="user_name1"></td>
+                  <td width="100px">名前</td><td><input class="form-control" type="text" name="order_name"></td>
                 </tr>
                 <tr>
-                  <td width="100px">メール</td><td><input class="form-control" type="text" name="user_email"></td>
+                  <td width="100px">メール</td><td><input class="form-control" type="text" name="order_email"></td>
                 </tr>
                 <tr>
-                  <td width="100px">連絡先</td><td><input class="form-control" type="text" name="user_phoneNumber1"></td>
+                  <td width="100px">連絡先</td><td><input class="form-control" type="text" name="order_hp"></td>
                 </tr>
             <?php 
               }else{
             ?>
                 <tr>
-                  <td width="100px">名前</td><td><input class="form-control" type="text" name="user_name1"
+                  <td width="100px">名前</td><td><input class="form-control" type="text" name="order_name"
                     value="<?= $user_info[0]->user_name ?>"></td>
                 </tr>
                 <tr>
-                  <td width="100px">メール</td><td><input class="form-control" type="text" name="user_email"
+                  <td width="100px">メール</td><td><input class="form-control" type="text" name="order_email"
                     value="<?= $user_info[0]->user_email ?>"></td>
                 </tr>
                 <tr>
-                  <td width="100px">連絡先</td><td><input class="form-control" type="text" name="user_phoneNumber1"
+                  <td width="100px">連絡先</td><td><input class="form-control" type="text" name="order_hp"
                     value="<?= $user_info[0]->user_phoneNumber ?>"></td>
                 </tr>
             <?php 
@@ -211,19 +212,19 @@
 
             <table class="table table-bordered">
                 <tr>
-                  <td width="100px">名前</td><td><input class="form-control" type="text" name="user_name2"
+                  <td width="100px">名前</td><td><input class="form-control" type="text" name="receiver_name"
                     value=""></td>
                 </tr>
                 <tr>
-                  <td width="100px">連絡先</td><td><input class="form-control" type="text" name="user_phoneNumber2"
+                  <td width="100px">連絡先</td><td><input class="form-control" type="text" name="receiver_hp"
                     value=""></td>
                 </tr>
                 <tr>
-                    <td width="100px">住所</td><td><input class="form-control" type="text" name="user_address"
+                    <td width="100px">住所</td><td><input class="form-control" type="text" name="receiver_address"
                     value=""></td>
                 </tr>
                 <tr>
-                    <td width="100px">お願いの　メッセージ</td><td><input class="form-control" type="text" name="user_message"
+                    <td width="100px">お願いの　メッセージ</td><td><input class="form-control" type="text" name="memo"
                     value=""></td>
                 </tr>
                 <tr>
@@ -237,14 +238,14 @@
                 <tr>
                   <td width="100px">決済方法</td>
                   <td width="">
-                      <input type="radio" name="payment" checked="checked" value="cash_on_delivery" /> 代金引換 
-                      <br>
-                      <input type="radio" name="payment" value="pay_in_bank" /> 銀行振込
-                      <br>
-                      <input type="radio" name="payment" value="credit_card" /> クレジットカード決済
-                      <br>
-                      <input type="radio" name="payment" value="deferred_payment" /> 後払い決済
-                      <br>
+					  <input type="radio" name="payment_option" checked="checked" value="1" /> 銀行振込
+					  <br>
+					  <input type="radio" name="payment_option"  value="2" /> 代金引換
+					  <br>
+					  <input type="radio" name="payment_option" value="3" /> クレジットカード決済
+					  <br>
+					  <input type="radio" name="payment_option" value="4" /> 後払い決済
+					  <br>
 
                   </td>
                 </tr>

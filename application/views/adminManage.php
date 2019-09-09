@@ -17,9 +17,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="/ECSHOP_TEST/js/admin.js"></script>
 </head>
 <body>
 <!-- TOP -->
+rffdfdfsfsdfsdf
 <div class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<a class="navbar-brand" href="#"> </a>
@@ -87,63 +89,55 @@
 <section>
 <!-- CATEGORY / BIG PHOTO --><!-- CATEGORY / BIG PHOTO -->
 	<div class="container-fluid">
-			<!-- 카테고리, 큰사진 중 큰사진 및 상품태그 시작 -->
-				<!-- 상품리스트 시작태그 -->
-				<div class="row">
-					<!-- 한개의 상품 -->
-
-						<div class="col-md-3 col-md-offset-3"></div>
-						<div class="col-md-6 col-md-offset-3">
-							<a href="/ECSHOP_TEST/index.php/manager/order">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>受注台帳</span>
-								</div>
-							</a>
-							<a href="/ECSHOP_TEST/index.php/manager/product">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>商品台帳</span>
-								</div>
-							</a>
-							<a href="/ECSHOP_TEST/index.php/manager/customer">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>顧客台帳</span>
-								</div>
-							</a>
-							<a href="/ECSHOP_TEST/index.php/manager/question">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>Q&A</span>
-								</div>
-							</a>
-							<a href="#">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>受注台帳</span>
-								</div>
-							</a>
-							<a href="#">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>受注台帳</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-3 col-md-offset-3"></div>
-					<!-- 상품리스트 끝 태그-->
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="col-md-3">
+					<div id="accordian">
+						<ul>
+							<li>
+								<h3><span class="icon-dashboard"></span>受注台帳</h3>
+								<ul>
+									<li><a href="#">受注台帳を見る</a></li>
+								</ul>
+							</li>
+							<li class="active">
+								<h3><span class="icon-tasks"></span>商品台帳</h3>
+								<ul>
+									<li><a href="#">商品台帳を見る</a></li>
+									<li><a href="#">商品登録</a></li>
+								</ul>
+							</li>
+							<li>
+								<h3><span class="icon-calendar"></span>顧客台帳</h3>
+								<ul>
+									<li><a href="#">顧客台帳を見る</a></li>
+								</ul>
+							</li>
+							<li>
+								<h3><span class="icon-heart"></span>Q&A</h3>
+								<ul>
+									<li><a href="#">Q&Aを見る</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</div>
-				<!-- 카테고리, 큰사진 중 큰사진 및 상품태그 시작 -->
+				<div class="col-md-9 line" >
+					<div class="title">
+						<h3>受注台帳を見る</h3>
+					</div>
+				</div>
 			</div>
-	</div>
-</section>
-<!-- CATEGORY / BIG PHOTO --><!-- CATEGORY / BIG PHOTO -->
-<br><br><br><br><br>
-<!-- Footer -->
-<footer class="navbar navbar-default navbar-fixed-bottom">
-	<div class="row">
-		<span></span>
-		<!-- <h6 align="center"> 現在のカート </h6>  -->
-
-		<div class="col-md-1">
-			<br>☜ カート
+			<div class="col-md-2"></div>
 		</div>
 	</div>
+</section>
+
+
+<!-- Footer -->
+<footer class="navbar navbar-default navbar-fixed-bottom">
+
 </footer>
 </body>
 </html>

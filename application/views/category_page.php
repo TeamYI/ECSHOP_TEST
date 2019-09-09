@@ -15,7 +15,8 @@
     <!-- bootstrap carosel -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>   
+    <script src="js/bootstrap.min.js"></script>
+	<script src="/ECSHOP_TEST/js/ecshop.js"></script>
   </head>
   <body>
 
@@ -40,15 +41,15 @@
                    様には会員登録お勧めします。</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
-                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cartAll">カート</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
             <?php
               }else{
             ?>
                 <li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
                    様ご来店ありがとうございます。</a></li>
-                   <li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
-                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
+				<li><a href="#s" onclick="logout()">ログアウト</a></li>
+                <li><a href="/ECSHOP_TEST/index.php/Controller_EC/cartAll">カート</a></li>
                 <li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
             <?php
               }
@@ -130,24 +131,24 @@
             <!-- 한개의 상품 -->
           <?php foreach($product as $ls) : ?>
 
-            <div class="col-sm-6 col-md-4">
-              <a href="/ECSHOP_TEST/index.php/Controller_EC/product/<?=$ls->pd_no?>">
-                <div class="thumbnail">
-                  <img src="/ECSHOP_TEST<?=$ls->pd_img?>" style="min-height:160px; height:90px;" />
-                  <div class="caption">
-                    <h3><?=$ls->pd_name?></h3>
-                    <h4>値段 : <?=$ls->pd_price?></h4>
-                    <h4>在庫 : <?=$ls->pd_stock?></h4>
-                    <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 180px;">説明 : <?=$ls->pd_comment?></p>
-                    <p>　
-                      <a href="/ECSHOP_TEST/index.php/Controller_EC/buy_page/<?=$ls->pd_no?>" class="btn btn-primary" role="button">購入</a>
-                      <a href="/ECSHOP_TEST/index.php/Controller_EC/quick_cart/<?=$ls->pd_no?>" class="btn btn-success" role="button">カゴへ</a>
-                      <!-- <a href="#" class="btn btn-danger" role="button">♡</a> -->
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </div>
+			  <div class="col-sm-6 col-md-4">
+				  <div class="thumbnail">
+					  <a href="/ECSHOP_TEST/index.php/Controller_EC/product/<?=$ls->pd_no?>">
+						  <img class="img-thumbnail" src="/ECSHOP_TEST<?=$ls->pd_img?>" style="min-height:160px; height:90px;" />
+						  <div class="caption">
+							  <h3><?=$ls->pd_name?></h3>
+							  <h4>値段: <?=$ls->pd_price?></h4>
+							  <h4>在庫: <?=$ls->pd_stock?></h4>
+							  <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 180px;">説明: <?=$ls->pd_comment?></p>
+						  </div>
+					  </a>
+					  <div>
+						  <p>
+							  <button class="btn btn-primary" onclick="confirmStock('<?=$ls->pd_stock?>','order','<?=$ls->pd_no?>')">購入</button>
+							  <button class="btn btn-success" onclick="confirmStock('<?=$ls->pd_stock?>','cart','<?=$ls->pd_no?>')">カゴへ</button>
+					  </div>
+				  </div>
+			  </div>
           <?php endforeach ?>
 
           <!-- 상품리스트 끝 태그-->
