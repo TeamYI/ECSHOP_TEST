@@ -179,8 +179,12 @@
 				</div>
 				<div class="tab_content" id="orderHistory_content">
 					<div class="tab_content_description">
-						<h4>注文履歴</h4>
-
+						<div>
+							<h4>注文履歴</h4>
+						</div>
+						<?php if($order_main != null){ ?>
+						<?php print_r($order_main) ?>
+						<?php echo $order_main!=null ?>
 						<?php foreach ($order_main as $main_ls) : ?>
 							<table class="table table-bordered table-hover">
 								<tr class="info">
@@ -210,6 +214,12 @@
 							</table>
 
 						<?php endforeach ?>
+						<?php }else{   ?>
+							<div>
+								<h5>購入履歴がありません。</h5>
+							</div>
+
+						<?php }   ?>
 					</div>
 				</div>
 			</div>

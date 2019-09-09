@@ -135,7 +135,7 @@
 				<span class="need-mark">*</span>
 			</span>
 			<!-- 로그인폼 --><!-- 로그인폼 -->
-			<form id="login-form" action="/ECSHOP_TEST/index.php/Controller_EC/signin" onsubmit="return registerUserInfoCheck()" method="post">
+			<form id="login-form" action="/ECSHOP_TEST/index.php/Controller_EC/signin" onsubmit="return checkUserInfo()" method="post">
 				<br>
 				<div>
 					<span class="need-mark">*</span>

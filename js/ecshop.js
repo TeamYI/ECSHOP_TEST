@@ -203,8 +203,8 @@ function confirmOrderValue(){
 
 /*--------------join----------------- */
 
-function registerUserInfoCheck(){
-
+function checkUserInfo(){
+	alert("ddd");
 	var user_pw = $("input[name='user_pw']");
 	var user_name = $("input[name='user_name']");
 	var user_email = $("input[name='user_email']");
@@ -212,8 +212,46 @@ function registerUserInfoCheck(){
 	var user_address = $("input[name='user_address']");
 	var boolean = true ;
 
+	console.log(user_phoneNumber.val());
+	if(user_pw.val() === ""){
+		user_pw.focus();
+		alert("必須項目を入力してください。");
+		return false ;
+	}else if(user_name.val() === ""){
+		user_name.focus();
+		alert("必須項目を入力してください。");
+		return false ;
+	}else if(user_email.val() === ""){
+		user_email.focus();
+		alert("必須項目を入力してください。");
+		return false ;
+	}else if(user_email.val() !== "" ){
+		boolean = verifyEmail(user_email.val());
+		console.log(boolean);
+		if(boolean === false){
+			alert('メール形式を確認してください');
+			return false;
+		}
+	}else if(user_phoneNumber.val() === ""){
+		user_phoneNumber.focus();
+		alert("必須項目を入力してください。");
+		return false ;
+	}else if(user_address.val() === ""){
+		user_address.focus();
+		alert("必須項目を入力してください。");
+		return false ;
+	}
 
-	return false;
+
+	if(user_phoneNumber.val() !== "" ){
+		boolean = verifyHP(user_phoneNumber.val());
+		console.log(boolean);
+		if(boolean === false){
+			alert('連絡先を確認してください');
+			return false;
+		}
+	}
+	return true;
 }
 
 /*--------------mypage -------------*/
@@ -225,46 +263,9 @@ function updateUserInfo(){
 	var user_email = $("input[name='user_email']");
 	var user_phoneNumber = $("input[name='user_phoneNumber']");
 	var user_address = $("input[name='user_address']");
-	var boolean = true ;
 
-	if(user_pw.val() == ""){
-		user_pw.focus();
-		alert("必須項目を入力してください。");
+	if(checkUserInfo() === false  ){
 		return false ;
-	}else if(user_name.val() == ""){
-		user_name.focus();
-		alert("必須項目を入力してください。");
-		return false ;
-	}else if(user_email.val() == ""){
-		user_email.focus();
-		alert("必須項目を入力してください。");
-		return false ;
-	}else if(user_phoneNumber.val() == ""){
-		user_phoneNumber.focus();
-		alert("必須項目を入力してください。");
-		return false ;
-	}else if(user_address.val() == ""){
-		user_address.focus();
-		alert("必須項目を入力してください。");
-		return false ;
-	}
-
-	if(user_email.val() != "" ){
-		boolean = verifyEmail(user_email.val());
-		console.log(boolean);
-		if(boolean == false){
-			alert('メール形式を確認してください');
-			return false;
-		}
-	}
-
-	if(user_phoneNumber.val() != "" ){
-		boolean = verifyHP(user_phoneNumber.val());
-		console.log(boolean);
-		if(boolean == false){
-			alert('連絡先を確認してください');
-			return false;
-		}
 	}
 
 	$.ajax({
