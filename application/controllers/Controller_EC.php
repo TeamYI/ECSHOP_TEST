@@ -68,7 +68,8 @@ class Controller_EC extends CI_Controller {
         
         $this->load->library('upload', $config);
         $this->upload->do_upload();
-        
+
+
         $this->load->model('Model_EC');
         $data_list['category'] = $this->Model_EC->get_category();
         $data_list['img'] = array(    
@@ -81,7 +82,6 @@ class Controller_EC extends CI_Controller {
     // ロゴをクリックするとホームに移動
 	public function home()
     {
-		$this->load->model('Model_EC');
 		$data_list['category'] = $this->Model_EC->get_category();
         $data_list['product'] = $this->Model_EC->get_all_product();
 
@@ -101,7 +101,6 @@ class Controller_EC extends CI_Controller {
     // 商品登録ページに移動（masterアカウント限定）
     public function product_upload_page()
     {
-        $this->load->model('Model_EC');
         $data_list['category'] = $this->Model_EC->get_category();
 
         $this->load->view('product_upload_page', $data_list);
@@ -110,7 +109,6 @@ class Controller_EC extends CI_Controller {
     // カテゴリ登録（商品登録ページ内）
     public function upload_category()
     {
-        $this->load->model('Model_EC');
         $data_list['category'] = $this->Model_EC->get_category();
         $this->Model_EC->upload_category($this->input->post('cg_name'));
     
@@ -349,7 +347,6 @@ class Controller_EC extends CI_Controller {
     {
 		$pd_no = $this->input->get('pd_no');
 		$od_qty = $this->input->get('qty');
-		echo $od_qty;
 		$this->cart($pd_no,$od_qty);
 		$category_list['category'] = $this->Model_EC->get_category();
 //		$this->load->view('cart_page', $category_list);
@@ -461,38 +458,38 @@ class Controller_EC extends CI_Controller {
     }
 
     // メインページと商品詳細ページでカゴへボタンを押した場合
-    public function quick_cart($pd_no)
-    {
-
-        $pd_info = $this->Model_EC->get_one_product($pd_no); 
-
-        $cart_data = array(
-                // idには商品PKが入っている
-               'id'      => $pd_info[0]->pd_no,
-               'qty'     => 1,
-               'price'   => (int)$pd_info[0]->pd_price,
-               'name'    => $pd_info[0]->pd_name,
-               'img'     => $pd_info[0]->pd_img
-            );
-
-        echo $this->cart->insert($cart_data);
-
-
-		if($this->session->userdata['ss_user_no'] > 0){
-			$to_cart_db = array(
-				'user_no' => (int)$this->session->userdata['ss_user_no'],
-				'pd_no' => $pd_info[0]->pd_no,
-				'qty' => 1
-			);
-
-			//　データベースにカートのデータを入れる
-			$this->Model_EC->insert_cart($to_cart_db);
-		}
-
-
-        $category_list['category'] = $this->Model_EC->get_category();
-        $this->load->view('cart_page',$category_list);
-    }
+//    public function quick_cart($pd_no)
+//    {
+//
+//        $pd_info = $this->Model_EC->get_one_product($pd_no);
+//
+//        $cart_data = array(
+//                // idには商品PKが入っている
+//               'id'      => $pd_info[0]->pd_no,
+//               'qty'     => 1,
+//               'price'   => (int)$pd_info[0]->pd_price,
+//               'name'    => $pd_info[0]->pd_name,
+//               'img'     => $pd_info[0]->pd_img
+//            );
+//
+//        echo $this->cart->insert($cart_data);
+//
+//
+//		if($this->session->userdata['ss_user_no'] > 0){
+//			$to_cart_db = array(
+//				'user_no' => (int)$this->session->userdata['ss_user_no'],
+//				'pd_no' => $pd_info[0]->pd_no,
+//				'qty' => 1
+//			);
+//
+//			//　データベースにカートのデータを入れる
+//			$this->Model_EC->insert_cart($to_cart_db);
+//		}
+//
+//
+//        $category_list['category'] = $this->Model_EC->get_category();
+//        $this->load->view('cart_page',$category_list);
+//    }
 
     // 注文履歴確認ページに（非会員限定）
     public function order_info_page()
@@ -518,14 +515,16 @@ class Controller_EC extends CI_Controller {
     {   
 
         $data_list['category'] = $this->Model_EC->get_category();
-        $data_list['order_main'] = $this->Model_EC->get_order_main_by_order_no( (int)$this->input->post('order_no') );
-        $data_list['order_info'] = $this->Model_EC->get_order_info();
+        $data_list['order_main'] = $this->Model_EC->getOrderMain( (int)$this->input->post('order_no') );
+        $data_list['order_info'] = $this->Model_EC->getOrderInfo((int)$this->input->post('order_no'));
+
         $this->load->view('order_info_page_for_customer', $data_list);
     }
 
     // カート＞注文ページに進む
     public function order_page()
     {
+
 
         $data_list['category'] = $this->Model_EC->get_category();
         $data_list['user_info'] = $this->Model_EC->get_user_info((int)$this->session->userdata['ss_user_no']);
@@ -542,17 +541,19 @@ class Controller_EC extends CI_Controller {
         $order_info["order_name"] = $this->input->post('order_name');
 		$order_info["order_email"] = $this->input->post('order_email');
 		$order_info["order_hp"] = $this->input->post('order_hp');
-		$order_info["order_price"] = $this->input->post('order_hp');
+		$order_info["order_price"] = $this->input->post('order_price');
 		$order_info["receiver_name"] = $this->input->post('receiver_name');
 		$order_info["receiver_hp"] = $this->input->post('receiver_hp');
 		$order_info["receiver_address"] = $this->input->post('receiver_address');
 		$order_info["memo"] = $this->input->post('memo');
 		$order_info["payment_option"] = $this->input->post('payment_option');
 		$order_product = array();
+		$orderType = $this->input->post('orderType');
 
+		echo $order_info["order_price"];
 		echo count($this->cart->contents());
 
-		if( count($this->cart->contents()) != 0 ){
+		if($orderType === "orderCart"){
 
 			foreach ( $this->cart->contents() as $ls) {
 
@@ -560,6 +561,8 @@ class Controller_EC extends CI_Controller {
 				$product['od_qty'] = $ls['qty'];
 
 				array_push($order_product,$product);
+				$this->Model_EC->delete_cart($order_info["user_no"]);
+				$this->destroy();
 			}
 		}else{
 			echo  "ddd";
@@ -574,11 +577,7 @@ class Controller_EC extends CI_Controller {
         $this->Model_EC->insert_order($order_info);
 
 
-        $this->Model_EC->delete_cart($order_info["user_no"]);
-
-        $this->destroy();
-
-		redirect('home');
+		redirect('orderSuccess');
 //        $this->home();
 
     }
@@ -593,16 +592,16 @@ class Controller_EC extends CI_Controller {
         if ( isset( $od_qty ))  {
             //echo $od_qty;
 
-            $data_list['od_qty'] = array('od_qty' => $od_qty);
+            $data_list['od_qty'] = $od_qty;
         }else{
-
+			$data_list['od_qty'] = 1;
         }
 
         $data_list['category'] = $this->Model_EC->get_category();
         $data_list['user_info'] = $this->Model_EC->get_user_info((int)$this->session->userdata['ss_user_no']);
         $data_list['product'] = $this->Model_EC->get_one_product($pd_no);
 
-        $this->load->view('buy_page', $data_list);
+        $this->load->view('order_page', $data_list);
     }
 
     function confirmCartStock(){
@@ -621,6 +620,18 @@ class Controller_EC extends CI_Controller {
 		echo json_encode($qty);
 
 
+	}
+
+	function orderStockCheck(){
+		$pd_no = $this->input->post('pd_no');
+	}
+
+	function orderSuccess(){
+
+    	$od_no = $this->Model_EC->get_order();
+		$data["orderMain"] = $this->Model_EC->getOrderMain($od_no);
+		$data["orderInfo"] = $this->Model_EC->getOrderInfo($od_no);
+		$this->load->view('order_success',$data);
 	}
 }
 ?>

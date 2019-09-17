@@ -129,9 +129,9 @@
 		</div>
 		<!-- 카테고리, 큰사진 중 큰사진 및 상품태그 시작 -->
 		<div class="col-md-9">
-
+			<form id="login-form" action="/ECSHOP_TEST/index.php/Controller_EC/order" method="post"
+				  onsubmit="return confirmOrderValue();">
 			<h3>注文ページ</h3>
-			<form method="post" action="/ECSHOP_TEST/index.php/Controller_EC/update">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 					<tr class="success">
@@ -143,32 +143,47 @@
 					</tr>
 					</thead>
 					<tbody>
-					<?php $i = 1; ?>
-					<?php foreach ($this->cart->contents() as $items): ?>
-						<input type="hidden" name="rowid[]" value="<?php echo $items['rowid']; ?>"/>
+					<?php if (!isset($product)) { ?>
+						<?php foreach ($this->cart->contents() as $items): ?>
+							<tr>
+								<input type="hidden" value="orderCart" name="orderType">
+								<input type="hidden" name="order_price"
+									   value="<?php echo number_format($this->cart->total()); ?>">
+
+								<td align="center"><img src="/ECSHOP_TEST<?php echo $items['img']; ?>"
+														style="min-height:80px; height:50px;"/></td>
+
+								<td><?php echo $items['name']; ?></td>
+								<td><?php echo number_format($items['price']); ?>円</td>
+								<td>
+									<?php echo $items['qty'] ?>
+								</td>
+								<td><?php echo number_format($items['subtotal']); ?>円</td>
+							</tr>
+						<?php endforeach; ?>
 						<tr>
-
-							<td align="center"><img src="/ECSHOP_TEST<?php echo $items['img']; ?>"
-													style="min-height:80px; height:50px;"/></td>
-
-							<td><?php echo $items['name']; ?></td>
-							<td><?php echo number_format($items['price']); ?>円</td>
-							<td>
-								<?php echo $items['qty'] ?>
-							</td>
-							<td><?php echo number_format($items['subtotal']); ?>円</td>
+							<td colspan="3" align="center"> 総合計</td>
+							<td><?php echo number_format($this->cart->total_items()); ?>個</td>
+							<td><?php echo number_format($this->cart->total()); ?>円</td>
 						</tr>
-						<?php $i++; ?>
-					<?php endforeach; ?>
-					<tr>
-						<td colspan="3" align="center"> 総合計</td>
-						<td><?php echo number_format($this->cart->total_items()); ?>個</td>
-						<td><?php echo number_format($this->cart->total()); ?>円</td>
-					</tr>
+					<?php } else { ?>
+						<tr>
+							<input type="hidden" value="orderQuick" name="orderType">
+							<input type="hidden" value="<?= $product[0]->pd_no ?>" name="pd_no">
+							<input type="hidden" value="<?= $od_qty ?>" name="od_qty">
+							<input type="hidden" name="order_price"
+								   value="<?php echo $product[0]->pd_price*$od_qty ?>">
+							<td class="active" width="100px"><img style="min-height:50px; height:50px;" src="/ECSHOP_TEST<?= $product[0]->pd_img ?>"></td>
+							<td><?= $product[0]->pd_name ?></td>
+							<td><?= $product[0]->pd_price ?></td>
+							<td><?= $od_qty?></td>
+							<td><?= $product[0]->pd_price*$od_qty ?></td>
+						</tr>
+					<?php } ?>
 					</tbody>
 
 				</table>
-			</form>
+
 
 			<div class="container-fluid">
 				<div class="row">
@@ -184,10 +199,6 @@
 							<span>必須 : </span>
 							<span class="need-mark">*</span>
 						</span>
-						<form id="login-form" action="/ECSHOP_TEST/index.php/Controller_EC/order" method="post"
-							  onsubmit="return confirmOrderValue();">
-							<input type="hidden" name="order_price"
-								   value="<?php echo number_format($this->cart->total()); ?>">
 							<table class="table table-bordered">
 								<?php
 								if ($this->session->userdata['ss_user_no'] == 0) {
@@ -312,11 +323,12 @@
 								<button type="submit" class="form-control btn btn-success">注文確定</button>
 							</div>
 
-						</form>
+
 					</div>
 					<div class="col-md-1">
 					</div>
 				</div>
+			</form>
 			</div>
 
 			<br><br><br><br><br>

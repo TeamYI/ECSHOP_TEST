@@ -131,7 +131,6 @@
 		<div class="col-md-9">
 
 			<h3>カゴページ</h3>
-			<!--          <form method="post" action="/ECSHOP_TEST/index.php/Controller_EC/update">-->
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 				<tr class="success">
@@ -147,8 +146,6 @@
 				<?php foreach ($this->cart->contents() as $items): ?>
 					<tr>
 						<input type="hidden" name="rowid" value="<?php echo $items['rowid']; ?>"/>
-						<!--			<td align="center"><input type="checkbox" name="del[]" value="-->
-						<?php //echo $i - 1;?><!--" /></td>-->
 						<td align="center"><img src="/ECSHOP_TEST<?php echo $items['img']; ?>"
 												style="min-height:80px; height:50px;"/></td>
 						<td><?php echo $items['name']; ?></td>
@@ -157,6 +154,7 @@
 							<input type="text" name="qty" value="<?php echo $items['qty'] ?>" maxlength="3" size="5"
 								   style="text-align:right"/>
 							<input type="hidden" name="stock" value="<?php echo $items['stock']; ?>"/>
+							<input type="hidden" name="name" value="<?php echo $items['name']; ?>"/>
 						</td>
 						<td><?php echo number_format($items['subtotal']); ?>円</td>
 					</tr>
@@ -166,8 +164,7 @@
 				<td><?php echo number_format($this->cart->total()); ?>円</td>
 				</tbody>
 				<tfoot>
-				<tr>
-					<?php  echo count($this->cart->contents())  ?>
+				<tr>s
 					<td colspan="5" style="text-align: center">
 						<input type="button" class="btn btn-success" onclick="orderPageMove('<?php echo count($this->cart->contents())?>')" value="購入"/>
 						<input type="button" class="btn btn-default" onclick="deleteCart()" value="カゴ全体削除"/>

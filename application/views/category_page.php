@@ -128,6 +128,8 @@
 
           <!-- 상품리스트 시작태그 -->
           <div class="row">
+
+			  <input type="hidden" class="form-control" name="qty" placeholder="qty" value="1" autofocus ><br>
             <!-- 한개의 상품 -->
           <?php foreach($product as $ls) : ?>
 
@@ -144,8 +146,8 @@
 					  </a>
 					  <div>
 						  <p>
-							  <button class="btn btn-primary" onclick="confirmStock('<?=$ls->pd_stock?>','order','<?=$ls->pd_no?>')">購入</button>
-							  <button class="btn btn-success" onclick="confirmStock('<?=$ls->pd_stock?>','cart','<?=$ls->pd_no?>')">カゴへ</button>
+							  <button class="btn btn-primary" onclick="moveOrderPage('<?=$ls->pd_stock?>','<?=$ls->pd_no?>')">購入</button>
+							  <button class="btn btn-success" onclick="moveCartPage('<?=$ls->pd_stock?>','<?=$ls->pd_no?>')">カゴへ</button>
 					  </div>
 				  </div>
 			  </div>

@@ -79,3 +79,40 @@ input[name="tab_item"] {
 	background-color: rgb(103, 103, 103);
 	color: white;
 }
+
+/* ---------------- order success page ---------------*/
+
+.orderSuccess{
+	border: 1px solid #bbbbbb;
+	text-align: center;
+	padding: 20px;
+	margin-top: 50px;
+}
+.orderSuccess h2 {
+	font-weight: 800;
+
+}
+.orderSuccess div {
+	margin-top: 20px;
+	text-align: center;
+
+}
+.orderSuccess div div:first-child{
+	text-align: left;
+	font-weight: 800;
+	font-size: 18px;
+}
+
+.orderSuccess div span:nth-child(2){
+	font-weight: 800;
+	font-size: 18px;
+}
+
+.orderSuccess button {
+	border: 0;
+	outline: 0;
+	margin: 0;
+	padding: 15px;
+	font-size: 15px;
+	cursor: pointer;
+}

@@ -11,12 +11,15 @@
 	<link href="/ECSHOP_TEST/css/admin.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-	<style type="text/css"> body {padding-top: 50px;} </style>
+	<style type="text/css"> body {
+			padding-top: 50px;
+		} </style>
 
 	<!-- bootstrap carosel -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="/ECSHOP_TEST/js/admin.js"></script>
 </head>
 <body>
 <!-- TOP -->
@@ -24,7 +27,7 @@
 	<div class="container">
 		<a class="navbar-brand" href="#"> </a>
 		<div class="navbar-header">
-			<button class="navbar-toggle collapsed"data-toggle="collapse" data-target="#target">
+			<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#target">
 				<span class="sr-only">Toggle Navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -34,7 +37,7 @@
 		<div class="collapse navbar-collapse" id="target">
 			<ul class="nav navbar-nav navbar-right">
 				<?php
-				if($this->session->userdata['ss_user_id']== "costomer"){
+				if ($this->session->userdata['ss_user_id'] == "costomer") {
 					?>
 					<li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
 							様には会員登録お勧めします。</a></li>
@@ -43,7 +46,7 @@
 					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
 					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
 					<?php
-				}else{
+				} else {
 					?>
 					<li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
 							様ご来店ありがとうございます。</a></li>
@@ -68,82 +71,84 @@
 			</div>
 			<div class="col-xs-6 col-sm-4">
 				<div class="center">
-					<a href="/ECSHOP_TEST/index.php/Controller_EC/home"><img src="/ECSHOP_TEST/img/logo.png" width="230px"></a>
+					<a href="/ECSHOP_TEST/index.php/moveAdmin"><img src="/ECSHOP_TEST/img/logo.png"
+																	width="230px"></a>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4">
 			</div>
 
-				<?php
-				if($this->session->userdata['ss_user_id']== "master"){
-					?>
-					<a href="/ECSHOP_TEST/index.php/Controller_EC/product_upload_page"><img src="/ECSHOP_TEST/img/pd_insert.png" width="180px"></a>
-				<?php } ?>
+			<!--			--><?php
+			//			if($this->session->userdata['ss_user_id']== "master"){
+			//				?>
+			<!--				<a href="/ECSHOP_TEST/index.php/Controller_EC/product_upload_page"><img src="/ECSHOP_TEST/img/pd_insert.png" width="180px"></a>-->
+			<!--			--><?php //} ?>
 		</div>
 	</div>
 </header>
 <!-- LOGO / SEARCH -->
 
-<section>
-<!-- CATEGORY / BIG PHOTO --><!-- CATEGORY / BIG PHOTO -->
-	<div class="container-fluid">
-			<!-- 카테고리, 큰사진 중 큰사진 및 상품태그 시작 -->
-				<!-- 상품리스트 시작태그 -->
-				<div class="row">
-					<!-- 한개의 상품 -->
 
-						<div class="col-md-3 col-md-offset-3"></div>
-						<div class="col-md-6 col-md-offset-3">
-							<a href="/ECSHOP_TEST/index.php/manager/order">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>受注台帳</span>
-								</div>
-							</a>
-							<a href="/ECSHOP_TEST/index.php/manager/product">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>商品台帳</span>
-								</div>
-							</a>
-							<a href="/ECSHOP_TEST/index.php/manager/customer">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>顧客台帳</span>
-								</div>
-							</a>
-							<a href="/ECSHOP_TEST/index.php/manager/question">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>Q&A</span>
-								</div>
-							</a>
-							<a href="#">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>受注台帳</span>
-								</div>
-							</a>
-							<a href="#">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>受注台帳</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-3 col-md-offset-3"></div>
-					<!-- 상품리스트 끝 태그-->
-				</div>
-				<!-- 카테고리, 큰사진 중 큰사진 및 상품태그 시작 -->
-			</div>
-	</div>
-</section>
 <!-- CATEGORY / BIG PHOTO --><!-- CATEGORY / BIG PHOTO -->
-<br><br><br><br><br>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<nav>
+				<div class="col-md-3">
+					<div id="accordian">
+						<ul>
+							<li>
+								<h3><span class="icon-dashboard"></span>受注台帳</h3>
+								<ul>
+									<li><a href="/ECSHOP_TEST/index.php/manager/order" class="order">受注台帳を見る</a></li>
+								</ul>
+							</li>
+							<li>
+								<h3><span class="icon-tasks"></span>商品台帳</h3>
+								<ul>
+									<li><a href="/ECSHOP_TEST/index.php/manager/product" class="product">商品台帳を見る</a>
+									</li>
+									<li><a href="/ECSHOP_TEST/index.php/manager/productUploadPage"
+										   class="productUpload">商品登録</a></li>
+								</ul>
+							</li>
+							<li>
+								<h3><span class="icon-calendar customer"></span>顧客台帳</h3>
+								<ul>
+									<li><a href="#">顧客台帳を見る</a></li>
+								</ul>
+							</li>
+							<li>
+								<h3><span class="icon-heart question"></span>Q&A</h3>
+								<ul>
+									<li><a href="#">Q&Aを見る</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<section>
+				<?php if (isset($orderList)) { ?>
+					<?php include "orderListManage.php" ?>
+				<?php } ?>
+				<?php if (isset($productList)) { ?>
+					<?php include "productListManage.php" ?>
+				<?php } ?>
+				<?php if (isset($productRegister)) { ?>
+					<?php include "productUploadManage.php" ?>
+				<?php } ?>
+			</section>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>
+
+
 <!-- Footer -->
 <footer class="navbar navbar-default navbar-fixed-bottom">
-	<div class="row">
-		<span></span>
-		<!-- <h6 align="center"> 現在のカート </h6>  -->
 
-		<div class="col-md-1">
-			<br>☜ カート
-		</div>
-	</div>
 </footer>
 </body>
 </html>

@@ -6,7 +6,7 @@ function logout(){
 function confirmStock(stock,pd_no){
 
 	var qty = $("input[name='qty']").val();
-	console.log(qty);
+
 	if(stock<=0){
 		var text = "この商品は在庫がありませんので、購入ができません。\n"
 					+"管理者にお問い合せをお願いします。" ;
@@ -18,15 +18,14 @@ function confirmStock(stock,pd_no){
 
 	//cart stock confirm
 	qty = confirmCartStock(qty,stock,pd_no);
-	console.log(qty);
 
 	if(stock < qty){
-		var text = "在庫より購入数が多いです。";
-
+		var text = "カートに在庫より購入数が多いです。\n";
 		alert(text);
 
 		return false;
 	}
+
 
 	return true ;
 }
@@ -54,7 +53,7 @@ function confirmCartStock(qty,stock,pd_no){
 		}
 	});
 
-	return allQty ;
+	return parseInt(allQty) ;
 
 
 }
@@ -107,9 +106,10 @@ function updateCart(){
 	var check = false ;
 
 	qty.each(function(){
-		var stock = $(this).next().val();
+		var stock = parseInt($(this).next().val());
+		var changeQty = parseInt($(this).val());
 
-		if(stock < $(this).val()){
+		if(stock < changeQty){
 			qty_position = $(this) ;
 			check = true ;
 		}
@@ -122,7 +122,7 @@ function updateCart(){
 	});
 
 
-	if(check == true){
+	if(check === true){
 		var text = "在庫より購入数が多いです。";
 		alert(text);
 		qty_position.focus();
@@ -141,6 +141,7 @@ function updateCart(){
 		},
 		success: function(data){
 			alert("修正しました。");
+			location.href = "/ECSHOP_TEST/index.php/Controller_EC/cartAll";
 
 		},
 		error : function(request,status,error){
@@ -161,7 +162,6 @@ function deleteCart(){
 		},
 		success: function(data){
 			alert("削除しました。");
-			location.href="/ECSHOP_TEST/index.php/Controller_EC/cartAll";
 		},
 		error : function(request,status,error){
 			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -171,30 +171,120 @@ function deleteCart(){
 
 
 function orderPageMove(orderProductCount){
-	if(orderProductCount>0){
+	var stock = $("input[name='stock']") ;
+	var qty = $("input[name='qty']") ;
+	var pd_name = $("input[name='name']") ;
+	var stockArray = [] ;
+	var qtyArray = [] ;
+	var pdNameArray = [] ;
+	var bool = true ;
+	stock.each(function(){
+		stockArray.push($(this));
+	});
+
+	qty.each(function(){
+		qtyArray.push($(this));
+	});
+
+	pd_name.each(function(){
+		pdNameArray.push($(this));
+	});
+
+
+	for(var i=0; i<stockArray.length ; i++){
+		console.log(stockArray[i].val());
+		console.log(qtyArray[i].val());
+
+		if(stockArray[i].val() < qtyArray[i].val() ){
+			bool = false ;
+			stockArray[i].prev().focus();
+			alert("「"+pdNameArray[i].val()+"」"+"在庫確認お願いします。");
+		}
+	}
+
+
+	if(orderProductCount>0 && bool === true ){
 		location.href = "/ECSHOP_TEST/index.php/Controller_EC/order_page";
-	}else{
+	}
+	if(orderProductCount === 0){
 		alert("注文商品がありません。");
 	}
 
 }
 
+function orderStockCheck(){
+	$.ajax({
+		url : "/ECSHOP_TEST/index.php/orderStockCheck",
+		type : "post",
+		data : {
+			// ci_t : csrf_token,
+			pd_no : pd_no
+		},
+		dataType : "json",
+		async : false,
+		success: function(data){
+			console.log("ddd");
+			console.log(data);
+			allQty = data+(parseInt(qty)) ;
+		},
+		error : function(request,status,error){
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
+
 function confirmOrderValue(){
 	var order_info = $(".order_info");
+	var order_email = $("input[name='order_email']");
+	var order_hp = $("input[name='order_hp']");
+	var receiver_hp = $("input[name='receiver_hp']");
 	var valueCheck = true ;
 
 	order_info.each(function(){
 		console.log($(this).val() );
 		if($(this).val() === ""){
+			$(this).focus();
 			valueCheck = false ;
+			alert("必須項目を入力してください。");
+			return false;
+
+		}else if(order_email.val() === $(this).val() ){
+			valueCheck = verifyEmail(order_email.val());
+			console.log(valueCheck);
+			if(valueCheck === false){
+				alert('メール形式を確認してください');
+				order_email.focus();
+				return false;
+			}
+		}else if(order_hp.val() === $(this).val() ){
+
+			valueCheck = verifyHP(order_hp.val());
+			console.log(valueCheck);
+			if(valueCheck === false){
+				alert('連絡先を確認してください');
+				order_hp.focus();
+				return false;
+			}
+		}else if(receiver_hp.val() === $(this).val() ){
+
+			valueCheck = verifyHP(receiver_hp.val());
+			console.log(valueCheck);
+			if(valueCheck === false){
+				alert('連絡先を確認してください');
+				receiver_hp.focus();
+				return false;
+			}
 		}
 	})
 
-	if(valueCheck === false){
-		alert("必須項目を入力してください。");
-	}
 
-	return valueCheck ;
+	// if(valueCheck === false){
+	// 	alert("必須項目を入力してください。");
+	// }
+	//
+	// return valueCheck ;
+
+	return valueCheck;
 
 }
 
@@ -293,7 +383,7 @@ function updateUserInfo(){
 
 function verifyEmail(user_email){
 	var email = user_email;
-	var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/ ;
+	var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+.[a-zA-Z]{2,3}$/ ;
 
 	if(pattern.test(email)){
 		return true ;

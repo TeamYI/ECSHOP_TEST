@@ -54,13 +54,22 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
+
 $route["moveAdmin"] = "AdminController/moveAdmin";
 $route["manager/(:any)"] = "AdminController/manager/$1" ;
+$route["order/(:any)"] = "AdminController/order/$1" ;
+$route["orderStatusChange"] = "AdminController/orderStatusChange" ;
+$route["productUploadPage"] = "AdminController/productUploadPage" ;
+$route["uploadCategory"] = "AdminController/uploadCategory" ;
+$route["uploadProduct"] = "AdminController/uploadProduct" ;
+$route["deleteProduct"] = "AdminController/deleteProduct" ;
+$route["deleteOrder"] = "AdminController/deleteOrder" ;
 
-
+$route["home"] = "Controller_EC/home";
 $route["buy_page"] = "Controller_EC/buy_page";
 $route["update"] = "Controller_EC/update";
 $route["destroy"] = "Controller_EC/destroy";
 $route["cartAll"] = "Controller_EC/cartAll";
 $route["confirmCartStock"] = "Controller_EC/confirmCartStock";
+$route["orderStockCheck"] = "Controller_EC/orderStockCheck";
 $route["updateUserInfo"] = "Controller_EC/updateUserInfo";

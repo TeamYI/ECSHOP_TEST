@@ -2,6 +2,18 @@ header {
 	margin: 50px 0;
 }
 
+.container-fluid {
+	margin-bottom: 70px;
+}
+
+button {
+	border: 0;
+	outline: 0;
+	padding: 15px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
 .center {
 	text-align: center;
 }
@@ -79,9 +91,84 @@ header {
 
 .line {
 	border: 1px solid black;
+	padding: 0 !important;
+}
+.title {
+	position: relative;
+	height: 60px;
+
+
 }
 
 .title h3{
+	position: absolute;
+	left: 0;
 	font-weight: 800;
 
 }
+.deleteButton {
+	position: absolute;
+	right: 0;
+	top:10px;
+	padding: 10px;
+}
+/*============================line========================*/
+
+.greyLine {
+	border: 1px solid #bbbbbb !important;
+	padding: 15px;
+	margin-bottom: 20px;
+}
+
+.orderSubTitle {
+	width: 100%;
+	background: #777777 ;
+	text-align: center;
+	padding: 2px 0;
+	color: white;
+}
+
+.orderInfoDiv{
+	border-bottom: 1px solid #777777;
+	padding: 10px;
+}
+
+.orderInfoDiv span{
+	display: inline-block;
+	width:45%;
+}
+.orderInfoDiv span:nth-child(1){
+	font-weight: 800;
+}
+
+.orderInfoDiv span select{
+	height: 25px;
+}
+
+.changeStatus {
+	width: 30%;
+	margin: 10px 0 ;
+}
+
+
+/*------------------------------ table------------------------------ */
+table {
+	border : 1px solid black;
+	width: 100%;
+}
+
+table tr{
+	height: 50px;
+	border-bottom: 1px solid black;
+}
+
+table th,td{
+
+	text-align: center;
+}
+
+table thead tr th {
+	font-size: 15px;
+	font-weight: 100;
+}
+

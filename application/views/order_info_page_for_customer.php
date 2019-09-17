@@ -157,34 +157,31 @@
 
           <br>
           <h4>注文履歴</h4>
-
-            <?php foreach($order_main as $main_ls) : ?>
               <table class="table table-bordered table-hover">
                 <tr class="info">
                     <td colspan="1" width="100px">注文番号</td> 
-                    <td colspan="3"><?= $main_ls->od_no ?></td>
+                    <td colspan="3"><?php echo $order_main->od_no ?></td>
                 </tr>
                 <tr class="success">
                     <td colspan="1" width="100px">注文日時</td> 
-                    <td colspan="3"><?= $main_ls->od_date ?></td>
+                    <td colspan="3"><?php echo $order_main->od_date ?></td>
                 </tr>
                 <tr class="warning">
                     <td colspan="1" width="100px">配送先</td> 
-                    <td colspan="3"><?= $main_ls->od_address ?></td>
+                    <td colspan="3"><?php echo $order_main->receiver_address ?></td>
                 </tr>
                 <?php foreach($order_info as $info_ls) : ?>
-                  <?php if($main_ls->od_no == $info_ls->od_no){ ?>
                     <tr>
                       <td class="active" width="100px"><img style="min-height:50px; height:50px;" src="/ECSHOP_TEST<?= $info_ls->pd_img ?>"></td>
                       <td><?= $info_ls->pd_name ?></td>
                       <td class="active" width="100px">数量</td> 
                       <td><?= $info_ls->od_qty ?></td>
                     </tr>
-                  <?php } ?>
+
                 <?php endforeach ?>
               </table>
                 
-            <?php endforeach ?>
+
 
           
           <!-- 주문내역 -->
