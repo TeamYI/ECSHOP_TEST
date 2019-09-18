@@ -22,11 +22,15 @@ class AdminController extends CI_Controller {
 			$data["orderList"] = $this->AdminModel->orderList();
 			$this->load->view('/admin/adminManage',$data);
 		}else if($name === "product"){
-			$data["productList"] = $this->AdminModel->selectProduct();
+			$data["productList"] = $this->AdminModel->selectProductList();
 			$this->load->view('/admin/adminManage',$data);
 		}else if($name === "productUploadPage"){
 			$data["productRegister"] = "";
 			$data['category'] = $this->AdminModel->get_category();
+			$this->load->view('/admin/adminManage',$data);
+
+		}else if($name === "customer"){
+			$data["customer"] = $this->AdminModel->selectUserList();
 			$this->load->view('/admin/adminManage',$data);
 
 		}
@@ -60,8 +64,73 @@ class AdminController extends CI_Controller {
 		}
 	}
 
-	public function productList(){
-		$this->load->view('productList');
+//	public function productList(){
+//		$this->load->view('productList');
+//
+//	}
+
+	public function product($pd_no){
+		$data["product"] = $this->AdminModel->selectProduct($pd_no);
+		$data['category'] = $this->AdminModel->get_category();
+		$this->load->view('/admin/productManage',$data);
+	}
+
+	public function updateProduct(){
+
+
+		$config['upload_path'] = './img';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = '204800';
+
+
+		$this->load->library('upload', $config);
+		$pd_img = "";
+
+		if ( !$this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+//			print_r($this->upload->display_errors());
+			$pd_img = $this->input->post('pd_img');
+
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+//			print_r($data);
+
+			$this->upload->do_upload();
+			$pd_img = '/img/'.$this->upload->data()['file_name'];
+
+		}
+
+
+		$pd_no = $this->input->post('pd_no') ;
+		$pd_name = $this->input->post('pd_name') ;
+		$pd_price = $this->input->post('pd_price') ;
+		$pd_stock = $this->input->post('pd_stock') ;
+		$cg_no = $this->input->post('category') ;
+		$pd_memo = $this->input->post('pd_memo') ;
+		$comment = $this->input->post('comment') ;
+
+		$data = array(
+			"pd_name" => $pd_name,
+			"pd_price" => $pd_price,
+			"pd_stock" => $pd_stock,
+			"pd_img" => $pd_img,
+			"cg_no" => $cg_no,
+			"pd_memo" => $pd_memo,
+			"pd_comment" => $comment,
+		);
+
+		$this->AdminModel->updateProduct($data, $pd_no);
+
+
+		$this->manager("product");
+
+
+
+
+
 	}
 
 	// 商品登録ページに移動（masterアカウント限定）
@@ -122,7 +191,7 @@ class AdminController extends CI_Controller {
 
 		$this->AdminModel->upload_product($product_data);
 
-		redirect();$this->manager("product");
+		$this->manager("product");
 	}
 
 	public function deleteProduct(){
@@ -132,6 +201,30 @@ class AdminController extends CI_Controller {
 			$this->AdminModel->deleteProduct($pdArray[$i]);
 		}
 
+	}
+
+	public function confirmProductNumberOverlap(){
+		$pdNumber = $this->input->post('pdNumber') ;
+
+		$result = $this->AdminModel->confirmProductNumberOverlap($pdNumber);
+
+		echo $result->count;
+	}
+
+	public function deleteCustomer(){
+		$userArray = $this->input->post('userArray') ;
+
+		for($i=0; $i<count($userArray); $i++){
+			$this->AdminModel->deleteCustomer($userArray[$i]);
+		}
+	}
+
+	public function confirmCategoryNameOverlap(){
+		$cg_name = $this->input->post('cg_name') ;
+
+		$result = $this->AdminModel->confirmCategoryNameOverlap($cg_name);
+
+		echo $result->count;
 	}
 
 }

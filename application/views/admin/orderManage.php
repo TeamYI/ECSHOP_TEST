@@ -36,26 +36,9 @@
 		</div>
 		<div class="collapse navbar-collapse" id="target">
 			<ul class="nav navbar-nav navbar-right">
-				<?php
-				if ($this->session->userdata['ss_user_id'] == "costomer") {
-					?>
-					<li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
-							様には会員登録お勧めします。</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
-					<?php
-				} else {
-					?>
-					<li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
-							様ご来店ありがとうございます。</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
-					<?php
-				}
-				?>
+				<li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
+						様ご来店ありがとうございます。</a></li>
+				<li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
 			</ul>
 		</div>
 	</div>
@@ -111,9 +94,9 @@
 							</ul>
 						</li>
 						<li>
-							<h3><span class="icon-calendar customer"></span>顧客台帳</h3>
+							<h3><span class="icon-calendar"></span>顧客台帳</h3>
 							<ul>
-								<li><a href="#">顧客台帳を見る</a></li>
+								<li><a href="/ECSHOP_TEST/index.php/manager/customer" class="customer">顧客台帳を見る</a></li>
 							</ul>
 						</li>
 						<li>

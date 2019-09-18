@@ -163,12 +163,16 @@ table tr{
 }
 
 table th,td{
-
 	text-align: center;
 }
 
 table thead tr th {
 	font-size: 15px;
 	font-weight: 100;
+}
+
+table tr td {
+
+	padding : 10px;
 }
 

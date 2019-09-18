@@ -89,12 +89,24 @@ class AdminModel extends CI_Model
 
 	}
 
-	public function selectProduct(){
+	public function selectProductList(){
 		$sql = "select * from product_info";
 
 		$result = $this->db->query($sql);
 
 		return $result->result() ;
+	}
+
+	public function selectProduct($pd_no){
+		$sql = "select * from product_info as p 
+				left join category as c
+				on c.cg_no = p.cg_no 
+				where pd_no = '$pd_no' ";
+
+		$result = $this->db->query($sql);
+		$result = $result->result();
+		$result = $result[0];
+		return $result ;
 	}
 
 	// カテゴリ情報
@@ -112,6 +124,15 @@ class AdminModel extends CI_Model
 		);
 
 		$this->db->insert('category', $object);
+	}
+
+	public function confirmCategoryNameOverlap($cg_name){
+		$sql = "select count(*) as count from category where cg_name = '$cg_name'";
+
+		$result = $this->db->query($sql);
+		$result = $result->result();
+		$result = $result[0];
+		return $result ;
 	}
 
 
@@ -136,6 +157,34 @@ class AdminModel extends CI_Model
 
 		$this->db->query($sql);
 
+	}
+
+	public function updateProduct($data, $pd_no){
+		$query = $this->db->update('product_info', $data, "pd_no = '$pd_no'");
+
+	}
+
+	public function confirmProductNumberOverlap($pdNumber){
+		$sql = "select count(*) as count from product_info where pd_Number = '$pdNumber'";
+
+		$result = $this->db->query($sql);
+		$result = $result->result();
+		$result = $result[0];
+		return $result ;
+	}
+
+	public function selectUserList(){
+		$sql = "select * from user_info";
+
+		$result = $this->db->query($sql);
+
+		return $result->result() ;
+	}
+
+	public function deleteCustomer($user_no){
+		$sql = "delete from user_info where user_no = $user_no";
+
+		$this->db->query($sql);
 	}
 
 }

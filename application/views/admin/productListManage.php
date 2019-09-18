@@ -7,7 +7,7 @@
 	<table>
 		<colgroup>
 			<col class="col-md-1">
-			<col class="col-md-1">
+			<col class="col-md-2">
 			<col class="col-md-3">
 			<col class="col-md-3">
 			<col class="col-md-1">
@@ -36,7 +36,7 @@
 				<td>
 					<input type="checkbox" name="pd_no" value="<?php echo $list->pd_no ?>">
 				</td>
-				<td><?php echo $list->pd_no ?></a></td>
+				<td><a href="/ECSHOP_TEST/index.php/product/<?php echo $list->pd_no ?>"><?php echo $list->pd_number ?></a></td>
 				<td><img src="/ECSHOP_TEST<?php echo $list->pd_img ?>" alt="" style="min-height:80px; height:50px;"></td>
 				<td><?php echo $list->pd_name ?></td>
 				<td><?php echo $list->pd_stock ?></td>

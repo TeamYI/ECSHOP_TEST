@@ -59,11 +59,17 @@ $route["moveAdmin"] = "AdminController/moveAdmin";
 $route["manager/(:any)"] = "AdminController/manager/$1" ;
 $route["order/(:any)"] = "AdminController/order/$1" ;
 $route["orderStatusChange"] = "AdminController/orderStatusChange" ;
+$route["product/(:any)"] = "AdminController/product/$1" ;
 $route["productUploadPage"] = "AdminController/productUploadPage" ;
+$route["confirmCategoryNameOverlap"] = "AdminController/confirmCategoryNameOverlap" ;
 $route["uploadCategory"] = "AdminController/uploadCategory" ;
 $route["uploadProduct"] = "AdminController/uploadProduct" ;
 $route["deleteProduct"] = "AdminController/deleteProduct" ;
+$route["updateProduct"] = "AdminController/updateProduct" ;
 $route["deleteOrder"] = "AdminController/deleteOrder" ;
+$route["confirmProductNumberOverlap"] = "AdminController/confirmProductNumberOverlap" ;
+$route["deleteCustomer"] = "AdminController/deleteCustomer" ;
+
 
 $route["home"] = "Controller_EC/home";
 $route["buy_page"] = "Controller_EC/buy_page";

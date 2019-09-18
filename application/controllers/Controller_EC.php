@@ -203,7 +203,12 @@ class Controller_EC extends CI_Controller {
         );
 
         if($login_data["user_id"] == "master"){
-			echo "admin";
+			$session_data = array(
+				'ss_user_id'        => 'master',
+				'ss_user_name'      => 'master',
+				'ss_user_no'        => 0
+			);
+			$this->session->set_userdata($session_data);
 			$this->load->view('ec_admin');
 
 		}else {

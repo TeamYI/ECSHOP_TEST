@@ -33,26 +33,10 @@
 		</div>
 		<div class="collapse navbar-collapse" id="target">
 			<ul class="nav navbar-nav navbar-right">
-				<?php
-				if($this->session->userdata['ss_user_id']== "costomer"){
-					?>
-					<li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
-							様には会員登録お勧めします。</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/login_page">ログイン</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/signin_page">会員登録</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/order_info_page">注文情報</a></li>
-					<?php
-				}else{
-					?>
-					<li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
-							様ご来店ありがとうございます。</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/cart_page/1">カート</a></li>
-					<li><a href="/ECSHOP_TEST/index.php/Controller_EC/mypage/2">MyPage</a></li>
-					<?php
-				}
-				?>
+				<li><a href="#">『<?php echo $this->session->userdata['ss_user_id']; ?>』
+						様ご来店ありがとうございます。</a></li>
+				<li><a href="/ECSHOP_TEST/index.php/Controller_EC/logout">ログアウト</a></li>
+
 			</ul>
 		</div>
 	</div>
@@ -74,11 +58,6 @@
 			<div class="col-xs-6 col-sm-4">
 			</div>
 
-				<?php
-				if($this->session->userdata['ss_user_id']== "master"){
-					?>
-					<a href="/ECSHOP_TEST/index.php/Controller_EC/product_upload_page"><img src="/ECSHOP_TEST/img/pd_insert.png" width="180px"></a>
-				<?php } ?>
 		</div>
 	</div>
 </header>
@@ -107,21 +86,6 @@
 							<a href="/ECSHOP_TEST/index.php/manager/customer">
 								<div class="col-xs-6 col-sm-3 col-md-4 box">
 									<span>顧客台帳</span>
-								</div>
-							</a>
-							<a href="/ECSHOP_TEST/index.php/manager/question">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>Q&A</span>
-								</div>
-							</a>
-							<a href="#">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>受注台帳</span>
-								</div>
-							</a>
-							<a href="#">
-								<div class="col-xs-6 col-sm-3 col-md-4 box">
-									<span>受注台帳</span>
 								</div>
 							</a>
 						</div>

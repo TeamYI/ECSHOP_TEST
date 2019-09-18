@@ -1,7 +1,7 @@
 <input type="hidden" name="page" value="productUpload">
 <div class="col-md-9">
 	<h4>カテゴリ登録</h4>
-	<form id="order_name" action="/ECSHOP_TEST/index.php/uploadCategory" method="post">
+	<form id="order_name" action="/ECSHOP_TEST/index.php/uploadCategory" method="post" onsubmit="return confirmCategory()">
 		<div class="input-group double-input">
               <span class="input-group-btn">
                 <div class="dropdown">
@@ -31,7 +31,7 @@
 	<h4>商品登録</h4>
 
 
-	<form id="order_name" action="/ECSHOP_TEST/index.php/uploadProduct" method="post" enctype="multipart/form-data">
+	<form id="order_name" action="/ECSHOP_TEST/index.php/uploadProduct" method="post" enctype="multipart/form-data" onsubmit="return confirmText()">
 
 		<!--		<div>-->
 		<!--			<input type="hidden" class="form-control" name="pd_img"-->
@@ -76,7 +76,7 @@
 		</div>
 		<br>
 		<div>
-			<label for="">値段</label>
+			<label for="">値段(円)</label>
 			<input type="text" class="form-control" name="pd_price" placeholder="値段">
 		</div>
 		<br>
