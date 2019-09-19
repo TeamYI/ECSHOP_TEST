@@ -100,12 +100,7 @@
 								<li><a href="/ECSHOP_TEST/index.php/manager/customer" class="customer">顧客台帳を見る</a></li>
 							</ul>
 						</li>
-						<li>
-							<h3><span class="icon-heart question"></span>Q&A</h3>
-							<ul>
-								<li><a href="#">Q&Aを見る</a></li>
-							</ul>
-						</li>
+
 					</ul>
 				</div>
 			</div>
@@ -164,12 +159,13 @@
 				<div class="col-md-12">
 					<div class="greyLine">
 						<span><h4>商品説明</h4></span>
-						<textarea name="comment" id="" cols="30" rows="10" style="width:100%"></textarea>
+						<textarea name="comment" id="" cols="30" rows="10" style="width:100%"><?php echo $product->pd_comment ?></textarea>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<input type="submit" value="保存">
 				</div>
+				</form>
 			</div>
 		</div>
 		<div class="col-md-2"></div>

@@ -52,7 +52,7 @@
 			</div>
 			<div class="col-xs-6 col-sm-4">
 				<div class="center">
-					<a href="/ECSHOP_TEST/index.php/Controller_EC/home"><img src="/ECSHOP_TEST/img/logo.png" width="230px"></a>
+					<a href="/ECSHOP_TEST/index.php/moveAdmin"><img src="/ECSHOP_TEST/img/logo.png" width="230px"></a>
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-4">

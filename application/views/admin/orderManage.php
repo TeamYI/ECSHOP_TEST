@@ -99,12 +99,7 @@
 								<li><a href="/ECSHOP_TEST/index.php/manager/customer" class="customer">顧客台帳を見る</a></li>
 							</ul>
 						</li>
-						<li>
-							<h3><span class="icon-heart question"></span>Q&A</h3>
-							<ul>
-								<li><a href="#">Q&Aを見る</a></li>
-							</ul>
-						</li>
+
 					</ul>
 				</div>
 			</div>

@@ -31,7 +31,7 @@ $(function () {
 
 
 	$("#updateProductImg").change(function(e){
-		alert("dd");
+
 		var files = e.target.files ;
 		var filesArr = Array.prototype.slice.call(files);
 
@@ -56,7 +56,6 @@ $(function () {
 
 
 function orderStatusChange(od_no) {
-	alert("od : " + od_no);
 
 	var paymentStatus = $("select[name='paymentCheck']").val();
 	var deliveryStatus = $("select[name='deliveryStatus']").val();
@@ -203,11 +202,11 @@ function confirmText(){
 		alert("入力してください。");
 		return false ;
 	}
-	else if(!pattern.test(parseInt(pdPrice.val())) || parseInt(pdPrice.val())<0 ){
+	else if(!pattern.test(pdPrice.val()) || pdPrice.val()<0 ){
 		pdPrice.focus();
 		alert("0以上の半額数字のみ書いてください。");
 		return false ;
-	}else if(!pattern.test(parseInt(pdStock.val())) || (parseInt(pdStock.val())<0)){
+	}else if(!pattern.test(pdStock.val()) || pdStock.val()<0){
 		pdStock.focus();
 		alert("0以上の半額数字のみ書いてください。");
 		return false ;

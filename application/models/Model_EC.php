@@ -153,6 +153,15 @@ class Model_EC extends CI_Model
 		return $query->result();
 	}
 
+	public function confirmUserIdOverlap($user_id){
+		$sql = "select count(*) as count from user_info where user_id = '$user_id'";
+
+		$result = $this->db->query($sql);
+		$result = $result->result();
+		$result = $result[0];
+		return $result ;
+	}
+
 	// 会員登録
 	public function signin($signin_data)
 	{

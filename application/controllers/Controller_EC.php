@@ -269,21 +269,22 @@ class Controller_EC extends CI_Controller {
 			'user_address' => $this->input->post('user_address')
 		);
 		
-		$this->load->model('Model_EC');
 
-        $user_info = $this->Model_EC->get_all_user_info();
-        foreach ($user_info as $ls) {
-            if ($ls->user_id == $this->input->post('user_id')) {
-                echo "<script>alert('同じアカウントがあります。ほかのIDを入力してください。');</script>";
-                $this->signin_page();
-                return ;
-            }
-        }
+
+
 
 		$this->Model_EC->signin($signin_data);
         echo "<script>alert('会員登録完了　＞　ログインページに');</script>";
         $this->login_page();
     }
+
+    public function confirmUserIdOverlap(){
+		$user_id = $this->input->post('user_id') ;
+
+		$result = $this->Model_EC->confirmUserIdOverlap($user_id);
+
+		echo $result->count;
+	}
 
     // MyPageに移動($varが 1-非会員/２-会員)
     public function mypage($var)
@@ -555,8 +556,7 @@ class Controller_EC extends CI_Controller {
 		$order_product = array();
 		$orderType = $this->input->post('orderType');
 
-		echo $order_info["order_price"];
-		echo count($this->cart->contents());
+
 
 		if($orderType === "orderCart"){
 
@@ -570,7 +570,7 @@ class Controller_EC extends CI_Controller {
 				$this->destroy();
 			}
 		}else{
-			echo  "ddd";
+
 			$product['pd_no'] = $this->input->post('pd_no');
 			$product['od_qty'] = $this->input->post('od_qty');
 			array_push($order_product,$product);
@@ -595,7 +595,7 @@ class Controller_EC extends CI_Controller {
         $od_qty = $this->input->get('qty');
 
         if ( isset( $od_qty ))  {
-            //echo $od_qty;
+
 
             $data_list['od_qty'] = $od_qty;
         }else{

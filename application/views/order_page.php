@@ -253,6 +253,13 @@
 										<td><input class="form-control order_info" type="text" name="order_hp"
 												   value="<?= $user_info[0]->user_phoneNumber ?>"></td>
 									</tr>
+									<tr>
+										<td width="100px">
+											<span>住所</span>
+										</td>
+										<td><input class="form-control order_info" type="text" name="order_address"
+												   value="<?= $user_info[0]->user_address ?>"></td>
+									</tr>
 									<?php
 								}
 								?>
@@ -264,7 +271,12 @@
 								<span>必須 : </span>
 								<span class="need-mark">*</span>
 							</span>
-
+<!--							--><?php //if ($this->session->userdata['ss_user_no'] != 0) { ?>
+							<span class="orderInfoCheckBox">
+								<label for="">注文者情報と同じ</label>
+								<input type="checkbox" onclick="getOrdererInfo(this)" value="0">
+							</span>
+<!--							--><?php //} ?>
 							<table class="table table-bordered">
 								<tr>
 									<td width="100px">

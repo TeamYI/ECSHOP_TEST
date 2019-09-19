@@ -79,3 +79,4 @@ $route["cartAll"] = "Controller_EC/cartAll";
 $route["confirmCartStock"] = "Controller_EC/confirmCartStock";
 $route["orderStockCheck"] = "Controller_EC/orderStockCheck";
 $route["updateUserInfo"] = "Controller_EC/updateUserInfo";
+$route["confirmUserIdOverlap"] = "Controller_EC/confirmUserIdOverlap";

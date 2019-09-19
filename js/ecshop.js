@@ -5,26 +5,7 @@ function logout(){
 
 function confirmStock(stock,pd_no){
 
-	var qty = $("input[name='qty']").val();
 
-	if(stock<=0){
-		var text = "この商品は在庫がありませんので、購入ができません。\n"
-					+"管理者にお問い合せをお願いします。" ;
-
-		alert(text);
-
-		return false;
-	}
-
-	//cart stock confirm
-	qty = confirmCartStock(qty,stock,pd_no);
-
-	if(stock < qty){
-		var text = "カートに在庫より購入数が多いです。\n";
-		alert(text);
-
-		return false;
-	}
 
 
 	return true ;
@@ -73,11 +54,25 @@ function confirmNum(){
 }
 
 function moveOrderPage(stock, pd_no){
-	var checkStock = confirmStock(stock,pd_no);
 	var checkNumber = confirmNum();
 
-	if(checkStock == true && checkNumber == true){
-		var qty = $("input[name='qty']").val();
+	var qty = $("input[name='qty']").val();
+
+	if(stock<=0){
+		var text = "この商品は在庫がありませんので、購入ができません。\n"
+			+"管理者にお問い合せをお願いします。" ;
+
+		alert(text);
+
+		return false;
+	}else if(stock < qty){
+		var text = "在庫より購入数が多いです。\n";
+		alert(text);
+
+		return false;
+	}
+
+	if(checkNumber === true){
 		location.href = "/ECSHOP_TEST/index.php/Controller_EC/buy_page?pd_no="+pd_no+"&qty="+qty;
 	}else{
 		return false ;
@@ -86,11 +81,30 @@ function moveOrderPage(stock, pd_no){
 
 function moveCartPage(stock,pd_no) {
 
-	var checkStock = confirmStock(stock,pd_no);
 	var checkNumber = confirmNum();
+	var qty = $("input[name='qty']").val();
 
-	if(checkStock == true && checkNumber == true){
-		var qty = $("input[name='qty']").val();
+	if(stock<=0){
+		var text = "この商品は在庫がありませんので、購入ができません。\n"
+			+"管理者にお問い合せをお願いします。" ;
+
+		alert(text);
+
+		return false;
+	}
+
+	//cart stock confirm
+	qty = confirmCartStock(qty,stock,pd_no);
+
+	if(stock < qty){
+		var text = "カートに在庫より購入数が多いです。\n";
+		alert(text);
+
+		return false;
+	}
+
+	if( checkNumber === true){
+		
 		location.href = "/ECSHOP_TEST/index.php/Controller_EC/cart_page?pd_no="+pd_no+"&qty="+qty;
 	}else{
 		return false ;
@@ -288,13 +302,38 @@ function confirmOrderValue(){
 
 }
 
+function getOrdererInfo(checkbox){
+	console.log(checkbox.value);
+
+	var value = checkbox.value;
+	var order_name = $("input[name='order_name']");
+	var order_hp = $("input[name='order_hp']");
+	var order_address = $("input[name='order_address']");
+
+	var receiver_name = $("input[name='receiver_name']");
+	var receiver_hp = $("input[name='receiver_hp']");
+	var receiver_address = $("input[name='receiver_address']");
+
+	if(value == 0){
+		checkbox.value = 1 ;
+		receiver_name.val(order_name.val());
+		receiver_hp.val(order_hp.val());
+		receiver_address.val(order_address.val());
+	}else{
+		checkbox.value = 0 ;
+		receiver_name.val("");
+		receiver_hp.val("");
+		receiver_address.val("");
+	}
+}
 
 
 
 /*--------------join----------------- */
 
 function checkUserInfo(){
-	alert("ddd");
+
+	var user_id = $("input[name='user_id']");
 	var user_pw = $("input[name='user_pw']");
 	var user_name = $("input[name='user_name']");
 	var user_email = $("input[name='user_email']");
@@ -303,7 +342,15 @@ function checkUserInfo(){
 	var boolean = true ;
 
 	console.log(user_phoneNumber.val());
-	if(user_pw.val() === ""){
+	if(user_id.val() === ""){
+		user_id.focus();
+		alert("必須項目を入力してください。");
+		return false ;
+	}else if(confirmUserIdOverlap(user_id.val())){
+		user_id.focus();
+		alert("すでに登録したIDです。");
+		return false ;
+	}else if(user_pw.val() === ""){
 		user_pw.focus();
 		alert("必須項目を入力してください。");
 		return false ;
@@ -342,6 +389,34 @@ function checkUserInfo(){
 		}
 	}
 	return true;
+}
+
+function confirmUserIdOverlap(user_id){
+	var check = false ;
+
+	$.ajax({
+		url: "/ECSHOP_TEST/index.php/confirmUserIdOverlap",
+		type: "post",
+		data: {
+			user_id: user_id
+		},
+		async : false ,
+		success: function (data) {
+			data = data.replace(/\s*/g,'');
+			console.log(data);
+			if(data !== "0"){
+				check = true;
+			}
+
+		},
+		error: function (request, status, error) {
+			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+
+
+		}
+	});
+
+	return check;
 }
 
 /*--------------mypage -------------*/

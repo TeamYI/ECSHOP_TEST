@@ -17,7 +17,8 @@ class AdminController extends CI_Controller {
 	}
 
 	function manager($name){
-		echo $name ;
+
+
 		if($name === "order"){
 			$data["orderList"] = $this->AdminModel->orderList();
 			$this->load->view('/admin/adminManage',$data);
@@ -38,7 +39,7 @@ class AdminController extends CI_Controller {
 	}
 
 	function order($od_no){
-		echo $od_no;
+
 		$data["orderInfo"] = $this->AdminModel->selectOrderInfo($od_no);
 		$data["ordererInfo"] = $this->AdminModel->selectOrdererInfo($od_no);
 		$data["receiverInfo"] = $this->AdminModel->selectReceiverInfo($od_no);
@@ -111,6 +112,8 @@ class AdminController extends CI_Controller {
 		$cg_no = $this->input->post('category') ;
 		$pd_memo = $this->input->post('pd_memo') ;
 		$comment = $this->input->post('comment') ;
+
+
 
 		$data = array(
 			"pd_name" => $pd_name,

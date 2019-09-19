@@ -128,7 +128,7 @@
 		<!-- 카테고리, 큰사진 중 큰사진 및 상품태그 시작 -->
 		<div class="col-md-6">
 			<span>
-				<h4>配送先情報</h4>
+				<h4>JOIN</h4>
 			</span>
 			<span class="need-info">
 				<span>必須 : </span>
