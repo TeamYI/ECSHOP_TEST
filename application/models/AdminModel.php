@@ -14,7 +14,7 @@ class AdminModel extends CI_Model
 				from order_main as a 
 				left join payment as b
 				on a.payment_option = b.payment_no
-				order by od_date";
+				order by a.od_date desc";
 
 		$result = $this->db->query($sql);
 
@@ -22,7 +22,7 @@ class AdminModel extends CI_Model
 	}
 
 	public function selectOrderInfo($od_no){
-		$sql = "select DATE_FORMAT(a.od_date, '%Y-%m-%d') as od_date ,od_no, b.payment_name, payment_check, delivery_status
+		$sql = "select DATE_FORMAT(a.od_date, '%Y-%m-%d') as od_date,od_price ,od_no, b.payment_name, payment_check, delivery_status
 				from order_main as a 
 				left join payment as b
 				on a.payment_option = b.payment_no
@@ -59,13 +59,8 @@ class AdminModel extends CI_Model
 
 	public function selectOrderProductInfo($od_no){
 
-		$sql ="SELECT om.od_price ,oi.pd_no, oi.od_no, pi.pd_img, pi.pd_name, pi.pd_price, oi.od_qty
-                FROM order_info as oi
-                JOIN product_info as pi
-                ON pi.pd_no = oi.pd_no
-                JOIN order_main as om 
-                ON om.od_no = oi.od_no
-				where oi.od_no = $od_no";
+		$sql ="select * from order_info 
+			   where od_no = $od_no";
 
 		$result = $this->db->query($sql);
 		$result = $result->result();

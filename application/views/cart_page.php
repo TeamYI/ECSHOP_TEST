@@ -129,12 +129,10 @@
 		</div>
 		<!-- 카테고리, 큰사진 중 큰사진 및 상품태그 시작 -->
 		<div class="col-md-9">
-
 			<h3>カゴページ</h3>
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 				<tr class="success">
-					<!--               <th align="center" width="65px">取消し</th> -->
 					<th>写真</th>
 					<th>商品名</th>
 					<th>値段</th>
@@ -164,7 +162,7 @@
 				<td><?php echo number_format($this->cart->total()); ?>円</td>
 				</tbody>
 				<tfoot>
-				<tr>s
+				<tr>
 					<td colspan="5" style="text-align: center">
 						<input type="button" class="btn btn-success" onclick="orderPageMove('<?php echo count($this->cart->contents())?>')" value="購入"/>
 						<input type="button" class="btn btn-default" onclick="deleteCart()" value="カゴ全体削除"/>

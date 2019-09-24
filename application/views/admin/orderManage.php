@@ -215,9 +215,7 @@
 							<thead>
 							<tr class="success">
 								<!--               <th align="center" width="65px">取消し</th> -->
-								<th>写真</th>
 								<th>商品名</th>
-								<th>値段</th>
 								<th>数量</th>
 								<th>合計</th>
 							</tr>
@@ -225,15 +223,13 @@
 							<tbody>
 							<?php foreach ($orderProductInfo as $orderProductInfo): ?>
 								<tr>
-									<td align="center"><img src="/ECSHOP_TEST<?php echo $orderProductInfo->pd_img ?>" style="min-height:80px; height:50px;"/></td>
 									<td><?php echo $orderProductInfo->pd_name ?></td>
-									<td><?php echo $orderProductInfo->pd_price ?>円</td>
 									<td><?php echo $orderProductInfo->od_qty ?></td>
-									<td><?php echo ((integer)$orderProductInfo->pd_price*(integer)$orderProductInfo->od_qty) ?>円</td>
+									<td><?php echo ((integer)$orderProductInfo->od_price) ?>円</td>
 								</tr>
 							<?php endforeach; ?>
-							<td colspan="4" align="center"> 総合計</td>
-							<td><?php echo $orderProductInfo->od_price ?>円</td>
+							<td colspan="2" align="center"> 総合計</td>
+							<td><?php echo $orderInfo->od_price ?>円</td>
 							</tbody>
 						</table>
 					</div>

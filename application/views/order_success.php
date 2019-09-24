@@ -112,13 +112,13 @@
 			<div class="col-md-12">
 				<span class="col-md-2"></span>
 				<span class="col-md-4">注文番号</span>
-				<span class="col-md-4"><?php echo $orderMain->od_no ?></span>
+				<span class="col-md-4"><?php echo $orderMain[0]->od_no ?></span>
 				<span class="col-md-2"></span>
 			</div>
 			<div class="col-md-12">
 				<span class="col-md-2"></span>
 				<span class="col-md-4">注文日時</span>
-				<span class="col-md-4"><?php echo $orderMain->od_date ?></span>
+				<span class="col-md-4"><?php echo $orderMain[0]->od_date ?></span>
 				<span class="col-md-2"></span>
 			</div>
 			<div class="col-md-12">
@@ -127,9 +127,8 @@
 					<thead>
 					<tr class="success">
 						<!--               <th align="center" width="65px">取消し</th> -->
-						<th>写真</th>
+
 						<th>商品名</th>
-						<th>値段</th>
 						<th>数量</th>
 						<th>合計</th>
 					</tr>
@@ -137,15 +136,13 @@
 					<tbody>
 					<?php foreach ($orderInfo as $orderInfo): ?>
 						<tr>
-							<td align="center"><img src="/ECSHOP_TEST<?php echo $orderInfo->pd_img ?>" style="min-height:80px; height:50px;"/></td>
 							<td><?php echo $orderInfo->pd_name ?></td>
-							<td><?php echo $orderInfo->pd_price ?>円</td>
 							<td><?php echo $orderInfo->od_qty ?></td>
-							<td><?php echo ((integer)$orderInfo->pd_price*(integer)$orderInfo->od_qty) ?>円</td>
+							<td><?php echo $orderInfo->od_price ?>円</td>
 						</tr>
 					<?php endforeach; ?>
-					<td colspan="4" align="center"> 総合計</td>
-					<td><?php echo $orderMain->od_price ?>円</td>
+					<td colspan="2" align="center"> 総合計</td>
+					<td><?php echo $orderMain[0]->od_price ?>円</td>
 					</tbody>
 				</table>
 			</div>

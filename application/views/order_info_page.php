@@ -125,18 +125,7 @@
         </div>
         <!-- 카테고리, 큰사진 중 큰사진 및 상품태그 시작 -->
         <div class="col-md-6">
-          <h3>非会員注文情報</h3><hr>
 
-          <!-- 로그인폼 --><!-- 로그인폼 -->
-          <form id="order_name" action="/ECSHOP_TEST/index.php/Controller_EC/check_order_info_by_order_name" method="post">
-            <h4>注文者名で照会 (機能準備中)</h4>
-            <div class="input-group double-input">
-            <input type="text" name="order_name" placeholder="注文者名" class="form-control" />
-            <span class="input-group-btn">
-                <button class="btn btn-success" type="submit">検索</button>
-            </span>
-            </div><!-- /input-group -->
-          </form>
           <!-- 로그인폼 --><!-- 로그인폼 -->
           <br>
 

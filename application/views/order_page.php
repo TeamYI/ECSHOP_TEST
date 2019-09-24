@@ -171,8 +171,10 @@
 							<input type="hidden" value="orderQuick" name="orderType">
 							<input type="hidden" value="<?= $product[0]->pd_no ?>" name="pd_no">
 							<input type="hidden" value="<?= $od_qty ?>" name="od_qty">
+							<input type="hidden" value="<?= $product[0]->pd_name ?>" name="pd_name">
 							<input type="hidden" name="order_price"
 								   value="<?php echo $product[0]->pd_price*$od_qty ?>">
+
 							<td class="active" width="100px"><img style="min-height:50px; height:50px;" src="/ECSHOP_TEST<?= $product[0]->pd_img ?>"></td>
 							<td><?= $product[0]->pd_name ?></td>
 							<td><?= $product[0]->pd_price ?></td>
@@ -322,10 +324,10 @@
 										<br>
 										<input type="radio" name="payment_option" value="2"/> 代金引換
 										<br>
-										<input type="radio" name="payment_option" value="3"/> クレジットカード決済
-										<br>
-										<input type="radio" name="payment_option" value="4"/> 後払い決済
-										<br>
+<!--										<input type="radio" name="payment_option" value="3"/> クレジットカード決済-->
+<!--										<br>-->
+<!--										<input type="radio" name="payment_option" value="4"/> 後払い決済-->
+<!--										<br>-->
 
 									</td>
 								</tr>

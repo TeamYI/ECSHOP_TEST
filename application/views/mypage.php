@@ -184,33 +184,43 @@
 						</div>
 						<?php if($order_main != null){ ?>
 						<?php foreach ($order_main as $main_ls) : ?>
-							<table class="table table-bordered table-hover">
-								<tr class="info">
-									<td colspan="1" width="100px">注文番号</td>
-									<td colspan="3"><?= $main_ls->od_no ?></td>
-								</tr>
-								<tr class="success">
-									<td colspan="1" width="100px">注文日時</td>
-									<td colspan="3"><?= $main_ls->od_date ?></td>
-								</tr>
-								<tr class="warning">
-									<td colspan="1" width="100px">配送先</td>
-									<td colspan="3"><?= $main_ls->receiver_address ?></td>
-								</tr>
-								<?php foreach ($order_info as $info_ls) : ?>
-									<?php if ($main_ls->od_no == $info_ls->od_no) { ?>
-										<tr>
-											<td class="active" width="100px"><img style="min-height:50px; height:50px;"
-																				  src="/ECSHOP_TEST<?= $info_ls->pd_img ?>">
-											</td>
-											<td><?= $info_ls->pd_name ?></td>
-											<td class="active" width="100px">数量</td>
-											<td><?= $info_ls->od_qty ?></td>
+								<table class="table table-striped table-bordered table-hover col-md-12">
+									<thead>
+										<tr class="success">
+											<!--               <th align="center" width="65px">取消し</th> -->
+										<tr class="info">
+											<td colspan="1" width="100px">注文番号</td>
+											<td colspan="3"><?= $main_ls->od_no ?></td>
 										</tr>
-									<?php } ?>
-								<?php endforeach ?>
-							</table>
-
+										<tr class="success">
+											<td colspan="1" width="100px">注文日時</td>
+											<td colspan="3"><?= $main_ls->od_date ?></td>
+										</tr>
+										<tr class="warning">
+											<td colspan="1" width="100px">配送先</td>
+											<td colspan="3"><?= $main_ls->receiver_address ?></td>
+										</tr>
+										<th>商品名</th>
+										<th>数量</th>
+										<th>合計</th>
+									</tr>
+									</thead>
+									<tbody>
+									<?php foreach ($order_info as $info_ls) : ?>
+										<?php if ($main_ls->od_no == $info_ls->od_no) { ?>
+											<tr>
+												<td><?= $info_ls->pd_name ?></td>
+												<td><?= $info_ls->od_qty ?></td>
+												<td><?= $info_ls->od_price ?></td>
+											</tr>
+										<?php } ?>
+									<?php endforeach ?>
+									<tr class="warning">
+										<td colspan="2">合計</td>
+										<td><?= $main_ls->od_price ?></td>
+									</tr>
+									</tbody>
+								</table>
 						<?php endforeach ?>
 						<?php }else{   ?>
 							<div>

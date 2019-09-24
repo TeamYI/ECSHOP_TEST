@@ -564,6 +564,8 @@ class Controller_EC extends CI_Controller {
 
 				$product['pd_no'] = $ls['id'];
 				$product['od_qty'] = $ls['qty'];
+				$product['pd_name'] = $ls['name'];
+				$product['od_price'] = $ls['subtotal'];
 
 				array_push($order_product,$product);
 				$this->Model_EC->delete_cart($order_info["user_no"]);
@@ -573,6 +575,8 @@ class Controller_EC extends CI_Controller {
 
 			$product['pd_no'] = $this->input->post('pd_no');
 			$product['od_qty'] = $this->input->post('od_qty');
+			$product['od_price'] = $this->input->post('order_price');
+			$product['pd_name'] = $this->input->post('pd_name');
 			array_push($order_product,$product);
 		}
 
@@ -580,10 +584,7 @@ class Controller_EC extends CI_Controller {
 		$order_info["order_product"] = $order_product;
 
         $this->Model_EC->insert_order($order_info);
-
-
 		redirect('orderSuccess');
-//        $this->home();
 
     }
 

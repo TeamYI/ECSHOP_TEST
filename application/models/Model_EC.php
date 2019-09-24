@@ -278,12 +278,14 @@ class Model_EC extends CI_Model
 		$od_no = $this->get_order();
 
 		foreach ($order_info["order_product"] as $product) {
-			print_r($product);
+
 			$pd_no = $product['pd_no'];
 			$od_qty = $product['od_qty'];
+			$pd_name = $product['pd_name'];
+			$od_price = $product['od_price'];
 
-			$query = "INSERT INTO order_info (od_no, pd_no, od_qty)
-									VALUES ('$od_no', '$pd_no', '$od_qty')";
+			$query = "INSERT INTO order_info (od_no, pd_no, od_qty,pd_name,od_price)
+									VALUES ('$od_no', '$pd_no', '$od_qty','$pd_name','$od_price')";
 
 			$this->db->query($query);
 
@@ -332,7 +334,8 @@ class Model_EC extends CI_Model
 		$query = "select * from order_main as a 
 				  left join delivery_info as b
 				  on a.od_no  = b.od_no 
-				  where a.user_no = $user_no";
+				  where a.user_no = $user_no
+		          order by a.od_date desc" ;
 
 		$result = $this->db->query($query);
 
@@ -343,10 +346,8 @@ class Model_EC extends CI_Model
 	public function get_order_info()
 	{
 
-		$query = "SELECT oi.pd_no, oi.od_no, pi.pd_img, pi.pd_name, oi.od_qty
-                FROM order_info as oi
-                JOIN product_info as pi
-                ON pi.pd_no = oi.pd_no";
+		$query = "SELECT * FROM order_info";
+
 		return $this->db->query($query)->result();
 	}
 
@@ -357,25 +358,22 @@ class Model_EC extends CI_Model
 				  from order_main as a 
 				  left join delivery_info as b
 				  on a.od_no  = b.od_no 
-				  where a.od_no = $od_no";
+				  where a.od_no = $od_no and a.user_no = 0";
 
 		$result = $this->db->query($query);
 		$result = $result->result();
-		$result = $result[0];
+
 		return $result;
 	}
 
 	// order_info　注文履歴
 	public function getOrderInfo($od_no)
 	{
-		$od_no = $this->get_order($od_no);
-		$query = "SELECT oi.pd_no, oi.od_no, pi.pd_img, pi.pd_name, pi.pd_price, oi.od_qty
-                FROM order_info as oi
-                JOIN product_info as pi
-                ON pi.pd_no = oi.pd_no
-				where oi.od_no = $od_no";
+		$query = "SELECT * FROM order_info
+				  where od_no = $od_no";
 
 		$result = $this->db->query($query);
+
 		$result = $result->result();
 
 		return $result;

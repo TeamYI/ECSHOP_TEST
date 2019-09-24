@@ -58,14 +58,15 @@ function moveOrderPage(stock, pd_no){
 
 	var qty = $("input[name='qty']").val();
 
-	if(stock<=0){
+
+	if(parseInt(stock)<=0){
 		var text = "この商品は在庫がありませんので、購入ができません。\n"
 			+"管理者にお問い合せをお願いします。" ;
 
 		alert(text);
 
 		return false;
-	}else if(stock < qty){
+	}else if(parseInt(stock) < qty){
 		var text = "在庫より購入数が多いです。\n";
 		alert(text);
 
@@ -84,7 +85,7 @@ function moveCartPage(stock,pd_no) {
 	var checkNumber = confirmNum();
 	var qty = $("input[name='qty']").val();
 
-	if(stock<=0){
+	if(parseInt(stock)<=0){
 		var text = "この商品は在庫がありませんので、購入ができません。\n"
 			+"管理者にお問い合せをお願いします。" ;
 
@@ -94,9 +95,9 @@ function moveCartPage(stock,pd_no) {
 	}
 
 	//cart stock confirm
-	qty = confirmCartStock(qty,stock,pd_no);
+	totalQty = confirmCartStock(qty,stock,pd_no);
 
-	if(stock < qty){
+	if(parseInt(stock) < totalQty){
 		var text = "カートに在庫より購入数が多いです。\n";
 		alert(text);
 
@@ -104,7 +105,6 @@ function moveCartPage(stock,pd_no) {
 	}
 
 	if( checkNumber === true){
-		
 		location.href = "/ECSHOP_TEST/index.php/Controller_EC/cart_page?pd_no="+pd_no+"&qty="+qty;
 	}else{
 		return false ;
